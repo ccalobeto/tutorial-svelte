@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>Resume</title>
+</svelte:head>
+
 <h1>My Resume</h1>
 <div>
   <div>
