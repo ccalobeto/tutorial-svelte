@@ -7,9 +7,9 @@ function $$(selector, context = document) {
 // generate the navigation links
 let pages = [
   { title: 'Home', url: '' },
-  { title: 'Projects', url: 'projects/' },
-  { title: 'Resume', url: 'resume/' },
-  { title: 'Contact', url: 'contact/' },
+  { title: 'Projects', url: './projects' },
+  { title: 'Resume', url: './resume' },
+  { title: 'Contact', url: './contact' },
   { title: 'Github', url: 'https://github.com/ccalobeto' }
 ]
 let nav = document.createElement('nav')
