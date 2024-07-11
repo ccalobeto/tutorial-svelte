@@ -1,3 +1,8 @@
+<script>
+  import projects from "$lib/projects.json";
+  import Project from "$lib/components/Project.svelte";
+</script>
+
 <svelte:head>
   <title>Home</title>
 </svelte:head>
@@ -7,3 +12,11 @@
   consequuntur, earum praesentium itaque, facilis architecto ratione?
 </p>
 <img src="./images/indy.jpg" alt="My favorite person" />
+<h1>
+  Latest Projects
+  <div class="projects">
+    {#each projects.slice(0, 3) as p}
+      <Project data={p} />
+    {/each}
+  </div>
+</h1>
