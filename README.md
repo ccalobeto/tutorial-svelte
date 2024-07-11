@@ -36,3 +36,21 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+# Notes
+These are useful tips to follow a successful carreer in data visualization. Taken from the course [vis-society](https://vis-society.github.io/)
+
+## Step 4: Templating projects from a data file
+
+1. set your data projects in /src/lib/projects.json
+Useful code to extract data from dev tools. Put it in the console log
+```
+$$(".projects > article").map (a => ({
+	title: $('h2', a).textContent,
+	image: $("img", a).getAttribute("src"),
+	description: $("p", a).textContent,
+}));
+```
+2. Load your data in src/routes/projects/+page.svelte
+3. Counting projects
+
