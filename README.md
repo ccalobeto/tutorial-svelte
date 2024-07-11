@@ -54,3 +54,19 @@ $$(".projects > article").map (a => ({
 2. Load your data in src/routes/projects/+page.svelte
 3. Counting projects
 
+## Step 5: Displaying the first 3 projects on the home page
+1. Create and use **Project** component
+This line is useful only to declare a prop variable
+In Project.svelte
+```
+export let data = {};
+```
+Project.svelte goes into components folder
+
+2. Showing the latest projects on the home page
+Use the <Project> component to  show the lastest 3.
+
+3. Customizing heading levels
+Set the hierarchy of the component using props and move styles from global style.css to the component into <style> element
+
+
