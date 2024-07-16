@@ -54,11 +54,3 @@ h6 {
   line-height: 1.1;
   text-wrap: balance;
 }
-
-.color-scheme {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-family: inherit;
-  width: 10%;
-}
