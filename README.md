@@ -40,7 +40,7 @@ You can preview the production build with `npm run preview`.
 # Notes
 These are useful tips to follow a successful carreer in data visualization. Taken from the course [vis-society](https://vis-society.github.io/)
 
-## Step 4: Templating projects from a data file
+## Step 4.4: Templating projects from a data file
 
 1. set your data projects in /src/lib/projects.json
 Useful code to extract data from dev tools. Put it in the console log
@@ -54,7 +54,7 @@ $$(".projects > article").map (a => ({
 2. Load your data in src/routes/projects/+page.svelte
 3. Counting projects
 
-## Step 5: Displaying the first 3 projects on the home page
+## Step 4.5: Displaying the first 3 projects on the home page
 1. Create and use **Project** component
 This line is useful only to declare a prop variable
 In Project.svelte
@@ -68,5 +68,15 @@ Use the <Project> component to  show the lastest 3.
 
 3. Customizing heading levels
 Set the hierarchy of the component using props and move styles from global style.css to the component into <style> element
+
+## Step 4.6: Creating a layout for UI shared across pages
+Create a Layout for nav.
+- An app has multiple layouts. In our case is there is a layout for the app.html.
+- The convention to create a layout component is `+layout.svelte`
+- Move part of the code from `global.js` to `+layout.svelte`
+- Must be placed `<slot />` inside the layout
+- Use `$page` from `$app/stores` to add a class to the current page link. 
+- The layout has its own styles.
+
 
 
