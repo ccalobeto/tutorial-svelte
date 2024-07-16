@@ -1,7 +1,3 @@
-function $$(selector, context = document) {
-  // the fuction returns an array of links given a selector for example $$('nav a')
-  return Array.from(context.querySelectorAll(selector));
-}
 // choose the background color-scheme using a selector
 document.body.insertAdjacentHTML("afterbegin", `
 	<label class="color-scheme">
