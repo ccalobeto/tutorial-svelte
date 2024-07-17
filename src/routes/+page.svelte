@@ -5,8 +5,6 @@
   let promise = fetch("https://api.github.com/users/leaverou").then(
     (response) => response.json(),
   );
-
-  console.log("promise:", promise);
 </script>
 
 <svelte:head>
