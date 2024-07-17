@@ -1,6 +1,12 @@
 <script>
   import projects from "$lib/projects.json";
   import Project from "$lib/components/Project.svelte";
+
+  let promise = fetch("https://api.github.com/users/leaverou").then(
+    (response) => response.json(),
+  );
+
+  console.log("promise:", promise);
 </script>
 
 <svelte:head>
@@ -12,6 +18,28 @@
   consequuntur, earum praesentium itaque, facilis architecto ratione?
 </p>
 <img src="./images/indy.jpg" alt="My favorite person" />
+
+<section>
+  <h2>My Github Stats</h2>
+  {#await promise}
+    <p>Loading...</p>
+  {:then data}
+    <dl>
+      <dt>Followers:</dt>
+      <dd>{data.followers}</dd>
+      <dt>Following:</dt>
+      <dd>{data.following}</dd>
+      <dt>Repos:</dt>
+      <dd>{data.public_repos}</dd>
+      <dt>Gists:</dt>
+      <dd>{data.public_gists}</dd>
+    </dl>
+  {:catch error}
+    <p class="error">
+      Something went wrong: {error.message}
+    </p>
+  {/await}
+</section>
 <h1>
   Latest Projects
   <div class="projects">
@@ -20,3 +48,22 @@
     {/each}
   </div>
 </h1>
+
+<style>
+  dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  dt {
+    font-weight: bold;
+    grid-row: 1;
+  }
+  dd {
+    margin-left: 0;
+    grid-row: 2;
+  }
+</style>

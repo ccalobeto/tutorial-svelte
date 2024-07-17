@@ -98,3 +98,32 @@ Use $ for reactivity statement
 Read from localStorage to save the color scheme
 
 Preventing FOUC (Optional) add the `script` code to the app.html
+
+## 5.2 Loading data from an API
+### Slides
+- Reactivity is recalculating things when an event occurs.
+- CSS is Reactive. Change a CSS variable via JS
+- JS is not reactive. You have to do it with event listeners
+- For reactivity in svelte do:
+![](./static/images/reactivity.png)
+`$` recalculate when dependencies change
+`bind:value={a}` update the UI when the input changes
+```
+<script>
+	let a = 1, b = 2, c;
+	$: c = a + b;
+</script>
+
+<input type="number" id="a" bind:value={a}> +
+<input type="number" id="b" bind:value={b}> =
+<input type="number" id="c" bind:value={c} disabled>
+```
+
+### Lab
+Images of the resuls
+![](./static/images/loading-api.png)
+- Use an API to extract github stats data. An example from `https://api.github.com/users/your-username`
+- *fetch* is an example of an asynchronous function. This means that it does not return the data directly, but rather a Promise that will eventually resolve to the data. In fact, fetch() returns a Promise that resolves to a Response object, which is a representation of the response to the request. To get meaningful data from a Response object, we need to call one of its methods, such as json(), which returns a Promise that resolves to the JSON representation of the response body.
+- Use the `#await`block for managing promises
+- Use `<dl>`, `<dt>` and `<dd>` tags and styles to custom display information.
+- Update the year of your projects.

@@ -2,61 +2,73 @@
   {
     "title": "Lorem ipsum dolor sit.",
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": "A little description"
+    "description": "A little description",
+    "year": 2018
   },
   {
     "title": "Voluptatem dolore sint totam!",
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": ""
+    "description": "",
+    "year": 2019
   },
   {
     "title": "Hic dignissimos distinctio debitis?",
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": ""
+    "description": "",
+    "year": 2020
   },
   {
     "title": "Modi sunt tempore nam!",
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": ""
+    "description": "",
+    "year": 2019
   },
   {
     "title": "Quia, quisquam autem? Ipsum!",
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": ""
+    "description": "",
+    "year": 2021
   },
   {
     "title": "Autem maxime ipsum error.",
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": ""
+    "description": "",
+    "year": 2020
   },
   {
     "title": "Fugiat ex sunt impedit!",
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": ""
+    "description": "",
+    "year": 2019
   },
   {
     "title": "Iure voluptatum placeat voluptas.",
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": ""
+    "description": "",
+    "year": 2021
   },
   {
     "title": "Consectetur illum nemo provident?",
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": ""
+    "description": "",
+    "year": 2020
   },
   {
     "title": "Hic qui omnis officia.",
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": ""
+    "description": "",
+    "year": 2023
   },
   {
     "title": "Facere aut qui enim?",
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": ""
+    "description": "",
+    "year": 2023
   },
   {
     "title": "Eum necessitatibus sed unde!",
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": ""
+    "description": "",
+    "year": 2023
   }
 ]
