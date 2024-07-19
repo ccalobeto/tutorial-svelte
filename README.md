@@ -358,3 +358,9 @@ No slides but useful information for this lab
 - Prepare your data and then pass it to arcgenerator.
 - Pass colors to the pie
 ![](./static/images/middle/6-visualizing-circle.png)
+
+### 6.1.2 More colors to the pie
+- Instead of generating the start and end angles for each slice for ourselves, use the `d3.pie()` function .
+- For categorizing data use `scaleOrdinal` with `d3.schemeTableau10` to generate a color function and change the path property value `colors[i]` by `color(i)` because this is a function now.
+![](./static/images/middle/6-visualizing-circle-more.png)
+
