@@ -342,3 +342,8 @@ No slides but useful information for this lab
 - [59 different examples as reusable templates.](https://observablehq.com/collection/@d3/charts)
 - [Convert into svelte + d3.js format](https://svelte.dev/repl/4cc901a472a54219974552ee2b71fefd?version=4.2.18)
 - Create a more sophisticated component so, for instance `<Sunburst {data} width=1152 height=1152 />` instead of `Sunburst(data, {width: 1152, height: 1152, ...})`
+
+### 6.0 Show year in each project
+- Add some description to projects.json
+- Add the year of the article
+- Style the article
