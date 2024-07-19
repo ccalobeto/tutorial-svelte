@@ -347,3 +347,9 @@ No slides but useful information for this lab
 - Add some description to projects.json
 - Add the year of the article
 - Style the article
+
+### 6.1: Creating a pie chart with D3
+- Create a Pie.svelte component
+- Create a circle svg
+
+### 6.1.3 Using a `<path>` instead of a `<circle>`
