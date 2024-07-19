@@ -348,8 +348,13 @@ No slides but useful information for this lab
 - Add the year of the article
 - Style the article
 
-### 6.1: Creating a pie chart with D3
+### 6.1.0: Creating a pie chart with D3
 - Create a Pie.svelte component
 - Create a circle svg
 
-### 6.1.3 Using a `<path>` instead of a `<circle>`
+### 6.1.1 Drawing our circle path with D3
+- Use of the powerful `<path>` element to draw a circle
+- Use of the `d3.arc()` function to generate the path for our circle and update the *d* value in `<svg`. Change `innerRadius(r)`, where `r` is the radius of the innercircle if you want a donut chart.
+- Prepare your data and then pass it to arcgenerator.
+- Pass colors to the pie
+![](./static/images/middle/6-visualizing-circle.png)
