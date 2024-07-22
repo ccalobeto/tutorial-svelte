@@ -16,8 +16,8 @@
   let colors = d3.scaleOrdinal(d3.schemeTableau10);
 </script>
 
-<svg viewBox="-50 -50 100 100">
-  <g class="chart">
+<div class="container">
+  <svg viewBox="-50 -50 100 100">
     {#each arcs as arc, i}
       <path d={arc} fill={colors(i)} />
     {/each}
@@ -48,6 +48,7 @@
     border: solid 1px #ccc;
     padding: 0.5em;
     margin: 1.2em;
+    flex: 1;
   }
 
   li {
@@ -64,5 +65,10 @@
   }
   span {
     display: inline-block;
+  }
+  div {
+    display: flex;
+    align-items: horizontal;
+    gap: 0.5em;
   }
 </style>
