@@ -1,7 +1,14 @@
 <script>
   import * as d3 from "d3";
 
-  let data = [1, 2, 3, 4, 5, 5];
+  let data = [
+    { value: 1, label: "apples" },
+    { value: 2, label: "oranges" },
+    { value: 3, label: "mangos" },
+    { value: 4, label: "pears" },
+    { value: 5, label: "limes" },
+    { value: 5, label: "cherries" },
+  ];
   let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
   let sliceGenerator = d3.pie();
   let arcData = sliceGenerator(data);
