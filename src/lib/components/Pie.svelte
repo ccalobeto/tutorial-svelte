@@ -2,10 +2,13 @@
   import * as d3 from "d3";
   export let data = [];
 
+  let arcData;
+  let arcs;
+
   let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
   let sliceGenerator = d3.pie().value((d) => d.value);
-  let arcData = sliceGenerator(data);
-  let arcs = arcData.map((d) => arcGenerator(d));
+  $: arcData = sliceGenerator(data);
+  $: arcs = arcData.map((d) => arcGenerator(d));
   let colors = d3.scaleOrdinal(d3.schemeTableau10);
 </script>
 
