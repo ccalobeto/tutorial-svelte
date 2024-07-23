@@ -17,11 +17,8 @@
   let filteredProjects;
 
   $: filteredProjects = projects.filter((project) => {
-    if (query) {
-      return project.title.includes(query);
-    }
-
-    return true;
+    let values = Object.values(project).join("\n").toLowerCase();
+    return values.includes(query.toLowerCase());
   });
 </script>
 
