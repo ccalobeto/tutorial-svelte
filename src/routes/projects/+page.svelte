@@ -31,10 +31,16 @@
   <title>Projects</title>
 </svelte:head>
 
+<input
+  type="search"
+  bind:value={query}
+  aria-label="Search projects"
+  placeholder=" Search projects ..."
+/>
 <h1>
   {projects.length} Projects
   <div class="projects">
-    {#each projects as p}
+    {#each filteredProjects as p}
       <Project data={p} hLevel={3} />
     {/each}
   </div>
