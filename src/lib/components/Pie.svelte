@@ -30,11 +30,25 @@
 </div>
 
 <style>
+  /* svg:has(path:hover) {
+    path:not(:hover) {
+      opacity: 10%;
+    }
+    max-width: 20em;
+    margin-block: 2em;
+    overflow: visible;
+  } */
+
   svg {
     max-width: 20em;
     margin-block: 2em;
-    /* Do not clip shapes outside the viewBox */
     overflow: visible;
+  }
+
+  svg:has(path:hover) {
+    path:not(:hover) {
+      opacity: 10%;
+    }
   }
 
   ul {
@@ -66,5 +80,9 @@
     display: flex;
     align-items: horizontal;
     gap: 0.5em;
+  }
+
+  path {
+    transition: 500ms;
   }
 </style>
