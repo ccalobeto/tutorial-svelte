@@ -348,19 +348,90 @@ No slides but useful information for this lab
 - Add the year of the article
 - Style the article
 
-### 6.1.0: Creating a pie chart with D3
+#### 6.1.0: Creating a pie chart with D3
 - Create a Pie.svelte component
 - Create a circle svg
 
-### 6.1.1 Drawing our circle path with D3
+#### 6.1.1 Drawing our circle path with D3
 - Use of the powerful `<path>` element to draw a circle
 - Use of the `d3.arc()` function to generate the path for our circle and update the *d* value in `<svg`. Change `innerRadius(r)`, where `r` is the radius of the innercircle if you want a donut chart.
 - Prepare your data and then pass it to arcgenerator.
 - Pass colors to the pie
 ![](./static/images/middle/6-visualizing-circle.png)
 
-### 6.1.2 More colors to the pie
+#### 6.1.2 More colors to the pie
 - Instead of generating the start and end angles for each slice for ourselves, use the `d3.pie()` function .
 - For categorizing data use `scaleOrdinal` with `d3.schemeTableau10` to generate a color function and change the path property value `colors[i]` by `color(i)` because this is a function now.
 ![](./static/images/middle/6-visualizing-circle-more.png)
 
+### 6.2 Adding a legend
+#### 6.2.1 Adding labels to our data
+
+#### 6.2.2 Adding a legend
+- Add the legend code
+- `<span>` is an inline element by default, so to get widths and heights to work you need to set this in the parent
+```
+span {
+    display: inline-block;
+  }
+```
+- Be careful to follow the steps
+- Correct the `span`circles, they are too big
+![](./static/images/middle/6-visualizing-legend.png)
+
+#### 6.2.3 Laying out our pie chart and legend side by side
+- Use a container to control the svg and the legend
+- Add div css
+
+<video src="./static/images/middle/6-visualizing-responsive-legend.mp4" autoplay muted loop></video>
+
+### 6.3 Plotting our actual data
+
+- Make data a prop of the component
+- Summarize data with d3.rollups which throws 
+```
+[
+	[ 2023, 3 ],
+	[ 2021, 2 ],
+	[ 2020, 3 ],
+	[ 2019, 3 ],
+  [ 2018, 1 ]
+]
+```
+- Transform array of arrays to an array of objects with map. This throws
+```
+[
+	{ value: 3, label: 2023},
+	{ value: 2, label: 2021},
+	{ value: 3, label: 2020},
+	{ value: 3, label: 2019},
+  { value: 1, label: 2018}
+]
+```
+Results
+![](./static/images/middle/6-visualizing-rollups.png)
+
+### 6.4: Adding a search for our projects
+
+- 6.4.1 Add an `<input type="search">` for basic search functionality showing only visible projects
+<video src="./static/images/middle/6-search-titles.mp4" autoplay muted loop></video>
+
+- 6.4.2 Make search case-insentive and search across all project metadata not just titles. We can use the `Object.values()` function to get an array of all the values of a project.
+
+- 6.4.3 Visualizing only visible objects with the use of reactivity in variables that change in the page and in the component. You can use multiple reactivity commands with `{}`.
+![](./static/images/middle/6-search-pie-reactive.mp4)
+
+### 6.5: Turning the pie into filtering UI
+Worked more on interactive visualizations
+
+- SVG elements are still DOM elements so they can be styled with regular CSS but the available properties are not the same.
+
+- 6.5.1 Highlighting hovered wedge. It is important to add another svg style to avoid a huge pie.
+
+![](./static/images/middle/6-UIFilter-wedge-hover-1.gif)
+
+- 6.5.2: Highlighting selected wedge
+
+Build a selected wedge and a selected legend with a click. The point is to catch the sector of the pie, add a conditional `selected` class and then manipulate by CSS.
+
+<video src="./static/images/middle/6-UIFilter-wedge-select.mp4" autoplay muted loop></video>
