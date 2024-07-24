@@ -11,16 +11,25 @@
   $: arcData = sliceGenerator(data);
   $: arcs = arcData.map((d) => arcGenerator(d));
   let colors = d3.scaleOrdinal(d3.schemeTableau10);
+
+  function toggleWedge(index, event) {
+    if (!event.key || event.key === "Enter") {
+      selectedIndex = selectedIndex === index ? -1 : index;
+    }
+  }
 </script>
 
 <div class="container">
   <svg viewBox="-50 -50 100 100">
     {#each arcs as arc, i}
       <path
+        tabindex="0"
+        role="button"
         d={arc}
         fill={colors(i)}
         class:selected={selectedIndex === i}
-        on:click={(e) => (selectedIndex = selectedIndex === i ? -1 : i)}
+        on:click={(e) => toggleWedge(i, e)}
+        on:keyup={(e) => toggleWedge(i, e)}
       />
     {/each}
   </svg>
@@ -29,10 +38,12 @@
     {#each data as d, index}
       <li style="--color: {colors(index)}">
         <span
+          tabindex="0"
+          role="button"
           class="swatch"
           class:selected={selectedIndex === index}
-          on:click={(e) =>
-            (selectedIndex = selectedIndex === index ? -1 : index)}
+          on:click={(e) => toggleWedge(i, e)}
+          on:keyup={(e) => toggleWedge(i, e)}
         ></span>
         <em>{d.label} ({d.value})</em>
       </li>
@@ -47,8 +58,8 @@
     overflow: visible;
   }
 
-  svg:has(path:hover) {
-    path:not(:hover) {
+  svg:has(path:hover, path:focus-visible) {
+    path:not(:hover, :focus-visible) {
       opacity: 50%;
     }
   }
@@ -87,6 +98,7 @@
   path {
     transition: 500ms;
     cursor: pointer;
+    outline: none;
   }
 
   .selected {
