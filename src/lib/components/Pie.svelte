@@ -42,8 +42,8 @@
           role="button"
           class="swatch"
           class:selected={selectedIndex === index}
-          on:click={(e) => toggleWedge(i, e)}
-          on:keyup={(e) => toggleWedge(i, e)}
+          on:click={(e) => toggleWedge(index, e)}
+          on:keyup={(e) => toggleWedge(index, e)}
         ></span>
         <em>{d.label} ({d.value})</em>
       </li>
