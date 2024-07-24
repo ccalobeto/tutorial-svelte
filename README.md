@@ -435,3 +435,33 @@ Worked more on interactive visualizations
 Build a selected wedge and a selected legend with a click. The point is to catch the sector of the pie, add a conditional `selected` class and then manipulate by CSS.
 
 <video src="./static/images/middle/6-UIFilter-wedge-select.mp4" autoplay muted loop></video>
+
+- 6.5.3 Filtering the projects by the selected year
+
+Filtering the projects by clicking the pie or legend. So, hold the selected index (`selectedYearIndex`) and bind it to the `<Pie>` component's `selectedIndex` prop. 
+Then define reactive variables to hold the selected year (`selectedYear`) and filter the projects (`filteredByYear`), use this to display them.
+<video src="./static/images/middle/6-UIFilter-year-filter-final.mp4" autoplay muted loop></video>
+
+- 6.5.4 Fixing accessibility issues
+
+The issues are related to `path` and `span` elements:  
+```
+Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler... 
+```
+or 
+```
+... with a click handler must have an ARIA role
+```
+
+To fix them, make them focusable changing attributes like `tabindex="0"`, expose it as a button `role="button"` and use a custom event listener called `toggleWedge`.
+
+An unexpected rectangular line will appear, hide it with `outline:none`.
+
+Finally modify the svg because keyboard users have no way to know which wedge they have currently focused, which is a terrible user experience.
+
+- 6.5.5: Better selected wedge styling (optional)
+
+IMPORTANT about SVG: Shapes are painted in the order they appear in the source code, and unlike in HTML, there is no way to change this order with CSS. So decorations like *strokes* or *shadows* will work nicely for one of the wedges and fail miserably for the others.
+Look after!
+
+
