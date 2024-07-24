@@ -33,7 +33,7 @@
           class:selected={selectedIndex === index}
           on:click={(e) =>
             (selectedIndex = selectedIndex === index ? -1 : index)}
-        />
+        ></span>
         <em>{d.label} ({d.value})</em>
       </li>
     {/each}
