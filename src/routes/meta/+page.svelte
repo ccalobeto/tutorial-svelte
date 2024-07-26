@@ -4,6 +4,13 @@
 
   let data = [];
   let commits = [];
+  let aggregatedData = [];
+  let maximumDepth = 0;
+  let longestLine = 0;
+  let files = 0;
+  let maxLines = 0;
+  let fileLengths = [];
+  let averageFileLength = 0;
 
   onMount(async () => {
     data = await d3.csv("loc.csv", (row) => ({
@@ -30,6 +37,8 @@
           datetime,
           hourFrac: datetime.getHours() + datetime.getMinutes() / 60,
           totalLines: lines.length,
+          maxDepth: d3.max(lines, (d) => d.depth),
+          files: d3.group(lines, (d) => d.file).size,
         };
 
         // Like ret.lines = lines
@@ -45,10 +54,59 @@
         return ret;
       });
 
-    console.log(commits);
+    console.log("commits:", commits);
+    console.log("data:", data);
   });
+
+  $: maximumDepth = d3.max(commits, (d) => d.maxDepth);
+  $: longestLine = d3.max(commits, (d) => d.totalLines);
+  $: files = d3.sum(commits, (d) => d.files);
+  $: maxLines = d3.sum(commits, (d) => d.totalLines);
+  $: fileLengths = d3.rollups(
+    data,
+    (v) => d3.max(v, (v) => v.line),
+    (d) => d.file,
+  );
+  $: averageFileLength = d3.mean(fileLengths, (d) => d[1]);
 </script>
 
 <h1>Meta</h1>
-<p>This page includes stats about the project.</p>
-<p>Total lines of code: {data.length}</p>
+<h2>Summary</h2>
+<dl class="stats">
+  <dt>COMMITS</dt>
+  <dd>{commits.length}</dd>
+  <dt>FILES</dt>
+  <dd>{files}</dd>
+  <dt>Total <abbr title="Lines of code">LOC</abbr></dt>
+  <dd>{data.length}</dd>
+  <dt>MAX DEPTH</dt>
+  <dd>{maximumDepth}</dd>
+  <dt>LONGEST LINE</dt>
+  <dd>{longestLine}</dd>
+  <dt>AVG FILE LENGTH</dt>
+  <dd>{averageFileLength}</dd>
+</dl>
+
+<style>
+  dl {
+    display: grid;
+    grid-template-columns: 8ch auto;
+    grid-gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  dt {
+    color: rgb(154, 153, 151);
+    font-weight: bold;
+    grid-row: 1;
+    margin-left: auto;
+    font-size: x-small;
+  }
+
+  dd {
+    margin-left: auto;
+    grid-row: 2;
+    font-size: x-large;
+  }
+</style>
