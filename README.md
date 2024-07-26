@@ -464,4 +464,51 @@ Finally modify the svg because keyboard users have no way to know which wedge th
 IMPORTANT about SVG: Shapes are painted in the order they appear in the source code, and unlike in HTML, there is no way to change this order with CSS. So decorations like *strokes* or *shadows* will work nicely for one of the wedges and fail miserably for the others.
 Look after!
 
+## Lab 7: Visualizing quantitative data with D3
 
+No slides
+
+### 7.0 Setting up
+- Adding a new page with meta-analysis of the code in our project
+- Install [elocuent](https://github.com/LeaVerou/elocuent) which is a code analysis script. Its output is a loc.csv file
+- Setting it up so that the CSV file is generated on every build.
+We also make sure our build environment in `deploy.yml` has access to all Git history. `fetch-depth: '0'` tells GitHub actions to fetch all history for all branches and tags via `actions/checkout@v4`.
+- Exclude CSV from committed files
+
+### 7.1 Displaying summary stats
+####  7.1.1: Reading the CSV file in D3
+
+`onMount` runs after the DOM and d3.csv is used to import the csv file
+
+#### 7.1.2: Computing commit data
+
+Sumarizing per commit, computing aditional keys and using `Object.defineProperty` to add a property key containig the raw data at the end of the object. 
+
+![](./static/images/middle/7-Computing%20commit%20data.png)
+
+#### 7.1.3: Use aggregations
+Aggregate stats with group, max, rollups
+- files: `d3.group(lines, (d) => d.file).size`
+- maxDepth: `d3.max(lines, (d) => d.depth)`
+- fileLengths: `d3.rollups(
+    data,
+    (v) => d3.max(v, (v) => v.line),
+    (d) => d.file,
+  )
+`
+
+### 7.2 Visualizing time and day of commits in a scatterplot
+- Set plot core dimensiones width, height and margins according to rule conventions.
+- Set scales of x and y domains.
+- Add `circle` element and sets their positions using these scales. 
+- Divide the plot into groups `g` for "dots", "axisX" and "axisY".
+- Use transfom into `g` element to translate both axis.
+- Adjust the axisY to look like hours, it use `string.padStart()` which formats it as a two digit number and finally, we append ":00" to it to make it look like a time.
+-  Add horizontal grid lines, this time with no text and use the `axis.tickSize()` method to make the lines extend across the whole chart
+```
+d3.select(yAxisGridlines).call(
+      d3.axisLeft(yScale)
+				.tickFormat("")
+				.tickSize(-usableArea.width),
+    );
+```
