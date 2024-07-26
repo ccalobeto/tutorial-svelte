@@ -4,13 +4,26 @@
 
   let data = [];
   let commits = [];
-  let aggregatedData = [];
   let maximumDepth = 0;
   let longestLine = 0;
   let files = 0;
   let maxLines = 0;
   let fileLengths = [];
   let averageFileLength = 0;
+  let width = 1000;
+  let height = 0.6 * width;
+  let yScale, xScale;
+  let margin = { top: 10, right: 10, bottom: 30, left: 20 };
+  let usableArea = {
+    top: margin.top,
+    right: width - margin.right,
+    bottom: height - margin.bottom,
+    left: margin.left,
+  };
+  usableArea.width = usableArea.right - usableArea.left;
+  usableArea.height = usableArea.bottom - usableArea.top;
+  let xAxis, yAxis;
+  let yAxisGridlines;
 
   onMount(async () => {
     data = await d3.csv("loc.csv", (row) => ({
@@ -53,9 +66,6 @@
 
         return ret;
       });
-
-    console.log("commits:", commits);
-    console.log("data:", data);
   });
 
   $: maximumDepth = d3.max(commits, (d) => d.maxDepth);
@@ -68,6 +78,28 @@
     (d) => d.file,
   );
   $: averageFileLength = d3.mean(fileLengths, (d) => d[1]);
+
+  $: yScale = d3
+    .scaleLinear()
+    .domain(d3.extent(commits, (d) => d.hourFrac))
+    .range([usableArea.top, usableArea.bottom]);
+  $: xScale = d3
+    .scaleTime()
+    .domain(d3.extent(commits, (d) => d.datetime))
+    .range([usableArea.left, usableArea.right]);
+  $: {
+    d3.select(xAxis).call(d3.axisBottom(xScale));
+    d3.select(yAxis).call(
+      d3
+        .axisLeft(yScale)
+        .tickFormat((d) => String(d % 24).padStart(2, "0") + ":00"),
+    );
+  }
+  $: {
+    d3.select(yAxisGridlines).call(
+      d3.axisLeft(yScale).tickFormat("").tickSize(-usableArea.width),
+    );
+  }
 </script>
 
 <h1>Meta</h1>
@@ -87,7 +119,36 @@
   <dd>{averageFileLength}</dd>
 </dl>
 
+<h3>Commits by time of day</h3>
+{console.log(commits[1])}
+
+<svg viewBox="0 0 {width} {height}">
+  <g transform="translate(0, {usableArea.bottom})" bind:this={xAxis} />
+  <g transform="translate({usableArea.left}, 0)" bind:this={yAxis} />
+  <g class="dots" transform="translate(0, 0)">
+    {#each commits as commit, index}
+      <circle
+        cx={xScale(commit.datetime)}
+        cy={yScale(commit.hourFrac)}
+        r="5"
+        fill="yellow"
+        stroke="gray"
+        stroke-width="2"
+        opacity="0.5"
+      />
+    {/each}
+  </g>
+  <g
+    class="grid"
+    transform="translate({usableArea.left}, 0)"
+    bind:this={yAxisGridlines}
+  />
+</svg>
+
 <style>
+  svg {
+    overflow: visible;
+  }
   dl {
     display: grid;
     grid-template-columns: 8ch auto;
@@ -108,5 +169,10 @@
     margin-left: auto;
     grid-row: 2;
     font-size: x-large;
+  }
+
+  .grid {
+    stroke: rgb(154, 153, 151);
+    opacity: 0.2;
   }
 </style>
