@@ -149,7 +149,7 @@
     bind:this={yAxisGridlines}
   />
 </svg>
-<Tooltip commit={hoveredCommit} />
+<Tooltip commit={hoveredCommit} index={hoveredIndex} />
 
 <style>
   svg {
