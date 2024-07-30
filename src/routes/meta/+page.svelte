@@ -1,6 +1,7 @@
 <script>
   import * as d3 from "d3";
   import { onMount } from "svelte";
+  import Tooltip from "../../lib/components/Tooltip.svelte";
 
   let data = [];
   let commits = [];
@@ -24,6 +25,7 @@
   usableArea.height = usableArea.bottom - usableArea.top;
   let xAxis, yAxis;
   let yAxisGridlines;
+  let hoveredIndex = -1;
 
   onMount(async () => {
     data = await d3.csv("loc.csv", (row) => ({
@@ -100,8 +102,11 @@
       d3.axisLeft(yScale).tickFormat("").tickSize(-usableArea.width),
     );
   }
+
+  $: hoveredCommit = commits[hoveredIndex] ?? hoveredCommit ?? {};
 </script>
 
+<!-- svelte-ignore css_unused_selector -->
 <h1>Meta</h1>
 <h2>Summary</h2>
 <dl class="stats">
@@ -120,8 +125,6 @@
 </dl>
 
 <h3>Commits by time of day</h3>
-{console.log(commits[1])}
-
 <svg viewBox="0 0 {width} {height}">
   <g transform="translate(0, {usableArea.bottom})" bind:this={xAxis} />
   <g transform="translate({usableArea.left}, 0)" bind:this={yAxis} />
@@ -135,6 +138,8 @@
         stroke="gray"
         stroke-width="2"
         opacity="0.5"
+        on:mouseenter={(event) => (hoveredIndex = index)}
+        on:mouseleave={(event) => (hoveredIndex = -1)}
       />
     {/each}
   </g>
@@ -144,6 +149,7 @@
     bind:this={yAxisGridlines}
   />
 </svg>
+<Tooltip commit={hoveredCommit} />
 
 <style>
   svg {
@@ -174,5 +180,15 @@
   .grid {
     stroke: rgb(154, 153, 151);
     opacity: 0.2;
+  }
+
+  circle {
+    transition: 10ms;
+
+    &:hover {
+      transform: scale(1.5);
+      transform-origin: center;
+      transform-box: fill-box;
+    }
   }
 </style>
