@@ -26,6 +26,7 @@
   let xAxis, yAxis;
   let yAxisGridlines;
   let hoveredIndex = -1;
+  let cursor = { x: 0, y: 0 };
 
   onMount(async () => {
     data = await d3.csv("loc.csv", (row) => ({
@@ -138,7 +139,10 @@
         stroke="gray"
         stroke-width="2"
         opacity="0.5"
-        on:mouseenter={(event) => (hoveredIndex = index)}
+        on:mouseenter={(event) => {
+          hoveredIndex = index;
+          cursor = { x: event.x, y: event.y };
+        }}
         on:mouseleave={(event) => (hoveredIndex = -1)}
       />
     {/each}
@@ -149,7 +153,7 @@
     bind:this={yAxisGridlines}
   />
 </svg>
-<Tooltip commit={hoveredCommit} index={hoveredIndex} />
+<Tooltip commit={hoveredCommit} index={hoveredIndex} {cursor} />
 
 <style>
   svg {

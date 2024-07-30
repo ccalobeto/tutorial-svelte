@@ -1,9 +1,15 @@
 <script>
   export let commit = {};
   export let index;
+  export let cursor;
 </script>
 
-<dl id="commit-tooltip" class="info tooltip" hidden={index === -1}>
+<dl
+  id="commit-tooltip"
+  class="info tooltip"
+  hidden={index === -1}
+  style="top: {cursor.y}px; left: {cursor.x}px"
+>
   <dt>Commit:</dt>
   <dd><a href={commit.url} target="_blank">{commit.id}</a></dd>
   <dt>Author:</dt>
