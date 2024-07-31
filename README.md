@@ -1,42 +1,3 @@
-# create-svelte
-
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
 # Notes
 These are useful concepts to follow a successful carreer in data visualization. Taken from the course [vis-society](https://vis-society.github.io/) from MIT.
 All the lab progress are in the commits.
@@ -162,6 +123,16 @@ Start the server
 ```
 npm run dev -- --open
 ```
+
+To create a production version of your local app:
+
+```
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
 
 ### 4.2: Porting your previous website to Svelte
 - First, copy your images/ folder as well as style.css and global.js to static/
@@ -419,7 +390,8 @@ Results
 - 6.4.2 Make search case-insentive and search across all project metadata not just titles. We can use the `Object.values()` function to get an array of all the values of a project.
 
 - 6.4.3 Visualizing only visible objects with the use of reactivity in variables that change in the page and in the component. You can use multiple reactivity commands with `{}`.
-![](./static/images/middle/6-search-pie-reactive.mp4)
+
+<video src="./static/images/middle/6-search-pie-reactive.mp4" autoplay muted loop></video>
 
 ### 6.5: Turning the pie into filtering UI
 Worked more on interactive visualizations
@@ -444,14 +416,14 @@ Then define reactive variables to hold the selected year (`selectedYear`) and fi
 
 - 6.5.4 Fixing accessibility issues
 
-The issues are related to `path` and `span` elements:  
-```
-Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler... 
-```
+These issues are related to `path` and `span` elements:  
+
+> Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler... 
+
 or 
-```
-... with a click handler must have an ARIA role
-```
+
+> ... with a click handler must have an ARIA role
+
 
 To fix them, make them focusable changing attributes like `tabindex="0"`, expose it as a button `role="button"` and use a custom event listener called `toggleWedge`.
 
@@ -512,3 +484,64 @@ d3.select(yAxisGridlines).call(
 				.tickSize(-usableArea.width),
     );
 ```
+
+### 7.3: Adding a tooltip 
+#### 7.3.1 Basic tooltip
+ - Use a `hoveredIndex` reactive variable to hold the index of the hovered commit. It holds the data we want to display in the tooltip.
+ - Add `mouseenter` and `mouseleave` event listeners inside the scatter plot circles.
+ - Add a class `info` to do some styling with `<dl>`, `<dt>`, and `<dd>` elements.
+ - *fixed* means relative to the viewport, *absolute* means relative to its nearest ancestor. An example 
+ ```
+.tooltip {
+    position: fixed;
+    top: 1em;
+    left: 1em;
+  }
+```
+- Animations
+```
+circle {
+    transition: 10ms;           // <- play with transition
+
+    &:hover {
+      transform: scale(1.5);    // <- expand the dot scale
+      transform-origin: center; // <- fix hover weirdness thing (appears when you translate a visible object to a different position of the default top-left coordinate system, like a tooltip for example)
+      transform-box: fill-box;  // <- fix weirdness thing(works in conjunction with the property above)
+    }
+  }
+```
+hovered weirdness
+![](./static/images/middle/7-hover-weirdness.gif)
+
+hovered fixed
+![](./static/images/middle/7-hover-fixed.gif)
+
+#### 7.3.2 Making it look like a tooltip
+- Style the tooltip with this properties `background-color`, `box-shadow`, `border-radius`, `backdrop-filter` and `padding`.
+- Making only appear when we are hovering over a dot by using the [hidden](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden) attribute 
+```
+<dl class="info" hidden={hoveredIndex === -1}>
+```
+and then use this attribute in css for hidding and transition  effects.
+```
+dl.info {
+	/* ... other styles ... */
+	transition-duration: 500ms;
+	transition-property: opacity, visibility;
+
+	&[hidden]:not(:hover, :focus-within) {
+		opacity: 0;
+		visibility: hidden;
+	}
+}
+```
+<video src="./static/images/7-tooltip-showhide.mp4" autoplay muted loop></video>
+
+#### 7.3.3 Positioning the tooltip near the mouse cursor
+Position the tooltip with the mouse based position using events. So in `circle` *mouseenter* event get the `event.x` and `event.y` pixel coordinates and pass them to tooltip inside `dl` element
+```
+<dl class="info" hidden={hoveredIndex === -1} style="top: {cursor.y}px; left: {cursor.x}px">
+```
+<video src="./static/images/7-tooltip-cursor.mp4" autoplay muted loop></video>
+> Usually avoid setting <u>default</u> CSS properties. So do settings directly like *style* in `dl` element.  
+
