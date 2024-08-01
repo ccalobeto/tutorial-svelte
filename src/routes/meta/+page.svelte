@@ -29,6 +29,7 @@
   let cursor = { x: 0, y: 0 };
 
   let svg;
+  let brushSelection;
 
   onMount(async () => {
     data = await d3.csv("loc.csv", (row) => ({
@@ -114,8 +115,25 @@
     .range([2, 20]);
 
   $: {
-    d3.select(svg).call(d3.brush());
+    d3.select(svg).call(d3.brush().on("start brush end", brushed));
     d3.select(svg).selectAll(".dots, .overlay ~ *").raise();
+  }
+
+  function brushed(event) {
+    // console.log(event.selection);
+    brushSelection = event.selection;
+    return brushSelection;
+  }
+
+  function isCommitSelected(commit) {
+    if (!brushSelection) {
+      return false;
+    }
+    let [[x0, y0], [x1, y1]] = brushSelection;
+    let x = xScale(commit.date);
+    let y = yScale(commit.hourFrac);
+    let isInsideShape = x >= x0 && x <= x1 && y >= y0 && y <= y1;
+    return isInsideShape;
   }
 </script>
 
@@ -144,6 +162,7 @@
   <g class="dots" transform="translate(0, 0)">
     {#each commits as commit, index}
       <circle
+        class:selected={isCommitSelected(commit)}
         cx={xScale(commit.datetime)}
         cy={yScale(commit.hourFrac)}
         r={rScale(commit.totalLines)}
@@ -168,6 +187,8 @@
   />
 </svg>
 <Tooltip commit={hoveredCommit} index={hoveredIndex} {cursor} />
+
+{console.log(brushSelection)}
 
 <style>
   svg {
@@ -209,6 +230,10 @@
       transform-origin: center;
       transform-box: fill-box;
     }
+
+    &.selected {
+      fill: turquoise;
+    }
   }
 
   @keyframes marching-ants {
@@ -219,9 +244,10 @@
 
   svg :global(.selection) {
     fill-opacity: 10%;
-    stroke: pink;
+    stroke: black;
     stroke-opacity: 1;
     stroke-dasharray: 5 3;
+    background-color: pink;
     animation: marching-ants 2s linear infinite;
   }
 </style>
