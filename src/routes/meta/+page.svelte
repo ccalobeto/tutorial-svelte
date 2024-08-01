@@ -28,6 +28,8 @@
   let hoveredIndex = -1;
   let cursor = { x: 0, y: 0 };
 
+  let svg;
+
   onMount(async () => {
     data = await d3.csv("loc.csv", (row) => ({
       ...row,
@@ -110,6 +112,11 @@
     .scaleSqrt()
     .domain(d3.extent(commits, (d) => d.totalLines))
     .range([2, 20]);
+
+  $: {
+    d3.select(svg).call(d3.brush());
+    d3.select(svg).selectAll(".dots, .overlay ~ *").raise();
+  }
 </script>
 
 <!-- svelte-ignore css_unused_selector -->
@@ -131,7 +138,7 @@
 </dl>
 
 <h3>Commits by time of day</h3>
-<svg viewBox="0 0 {width} {height}">
+<svg viewBox="0 0 {width} {height}" bind:this={svg}>
   <g transform="translate(0, {usableArea.bottom})" bind:this={xAxis} />
   <g transform="translate({usableArea.left}, 0)" bind:this={yAxis} />
   <g class="dots" transform="translate(0, 0)">
