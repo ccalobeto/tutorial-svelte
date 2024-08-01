@@ -144,6 +144,8 @@
           cursor = { x: event.x, y: event.y };
         }}
         on:mouseleave={(event) => (hoveredIndex = -1)}
+        tabindex="0"
+        role="button"
       />
     {/each}
   </g>
