@@ -13,7 +13,7 @@
   let averageFileLength = 0;
   let width = 1000;
   let height = 0.6 * width;
-  let yScale, xScale;
+  let rScale, yScale, xScale;
   let margin = { top: 10, right: 10, bottom: 30, left: 20 };
   let usableArea = {
     top: margin.top,
@@ -69,6 +69,7 @@
 
         return ret;
       });
+    commits = d3.sort(commits, (d) => -d.totalLines);
   });
 
   $: maximumDepth = d3.max(commits, (d) => d.maxDepth);
@@ -105,6 +106,10 @@
   }
 
   $: hoveredCommit = commits[hoveredIndex] ?? hoveredCommit ?? {};
+  $: rScale = d3
+    .scaleSqrt()
+    .domain(d3.extent(commits, (d) => d.totalLines))
+    .range([2, 20]);
 </script>
 
 <!-- svelte-ignore css_unused_selector -->
@@ -134,7 +139,7 @@
       <circle
         cx={xScale(commit.datetime)}
         cy={yScale(commit.hourFrac)}
-        r="5"
+        r={rScale(commit.totalLines)}
         fill="yellow"
         stroke="gray"
         stroke-width="2"
@@ -190,9 +195,10 @@
 
   circle {
     transition: 10ms;
+    fill-opacity: 0.4;
 
     &:hover {
-      transform: scale(1.5);
+      transform: scale(1.2);
       transform-origin: center;
       transform-box: fill-box;
     }
