@@ -210,4 +210,18 @@
       transform-box: fill-box;
     }
   }
+
+  @keyframes marching-ants {
+    to {
+      stroke-dashoffset: -8;
+    }
+  }
+
+  svg :global(.selection) {
+    fill-opacity: 10%;
+    stroke: pink;
+    stroke-opacity: 1;
+    stroke-dasharray: 5 3;
+    animation: marching-ants 2s linear infinite;
+  }
 </style>
