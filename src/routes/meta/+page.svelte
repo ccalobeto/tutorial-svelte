@@ -2,6 +2,7 @@
   import * as d3 from "d3";
   import { onMount } from "svelte";
   import Tooltip from "../../lib/components/Tooltip.svelte";
+  import Pie from "../../lib/components/Pie.svelte";
 
   let data = [];
   let commits = [];
@@ -221,6 +222,13 @@
     <dd>{item.lines} lines ({formatter(item.percentage)})</dd>
   {/each}
 </dl>
+
+<Pie
+  data={languageBreakdown.map((d) => ({
+    label: d.language,
+    value: d.lines,
+  }))}
+/>
 
 <style>
   svg {
