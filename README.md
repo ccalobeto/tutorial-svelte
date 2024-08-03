@@ -487,10 +487,14 @@ d3.select(yAxisGridlines).call(
 
 ### 7.3: Adding a tooltip 
 #### 7.3.1 Basic tooltip
- - Use a `hoveredIndex` reactive variable to hold the index of the hovered commit. It holds the data we want to display in the tooltip.
- - Add `mouseenter` and `mouseleave` event listeners inside the scatter plot circles.
- - Add a class `info` to do some styling with `<dl>`, `<dt>`, and `<dd>` elements.
- - *fixed* means relative to the viewport, *absolute* means relative to its nearest ancestor. An example 
+ Use a `hoveredIndex` reactive variable to hold the index of the hovered commit. It holds the data we want to display in the tooltip.
+
+ Add `mouseenter` and `mouseleave` event listeners inside the scatter plot circles.
+
+ Add a class `info` to do some styling with `<dl>`, `<dt>`, and `<dd>` elements.
+
+ *fixed* means relative to the viewport and *absolute* means relative to its nearest ancestor. An example 
+
  ```
 .tooltip {
     position: fixed;
@@ -498,7 +502,7 @@ d3.select(yAxisGridlines).call(
     left: 1em;
   }
 ```
-- Animations
+Animations
 ```
 circle {
     transition: 10ms;           // <- play with transition
@@ -517,12 +521,16 @@ hovered fixed
 ![](./static/images/middle/7-hover-fixed.gif)
 
 #### 7.3.2 Making it look like a tooltip
-- Style the tooltip with this properties `background-color`, `box-shadow`, `border-radius`, `backdrop-filter` and `padding`.
-- Making only appear when we are hovering over a dot by using the [hidden](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden) attribute 
+Style the tooltip with this properties `background-color`, `box-shadow`, `border-radius`, `backdrop-filter` and `padding`.
+
+Making only appear when we are hovering over a dot by using the [hidden](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden) attribute 
+
 ```
 <dl class="info" hidden={hoveredIndex === -1}>
 ```
+
 and then use this attribute in css for hidding and transition  effects.
+
 ```
 dl.info {
 	/* ... other styles ... */
@@ -535,13 +543,114 @@ dl.info {
 	}
 }
 ```
+Results
 <video src="./static/images/7-tooltip-showhide.mp4" autoplay muted loop></video>
 
 #### 7.3.3 Positioning the tooltip near the mouse cursor
 Position the tooltip with the mouse based position using events. So in `circle` *mouseenter* event get the `event.x` and `event.y` pixel coordinates and pass them to tooltip inside `dl` element
+
 ```
 <dl class="info" hidden={hoveredIndex === -1} style="top: {cursor.y}px; left: {cursor.x}px">
 ```
+
 <video src="./static/images/7-tooltip-cursor.mp4" autoplay muted loop></video>
+
 > Usually avoid setting <u>default</u> CSS properties. So do settings directly like *style* in `dl` element.  
 
+#### 7.3.4 Bulletproof positioning (optional-Not completed)
+The tooltip built only works if the mouse is near the center of the viewport. Near the edges the tooltip fails and it shows cutten. Here is an image of a cutten tooltip.
+
+![](./static/images/middle/7-cutten%20tooltip.png)
+
+The solution is really complicated, it is better to save our time using a tool called **@floating-ui/dom**. So install it!. This works only with DOM elements.
+
+Move event listeners code to `dotInteraction (index, event)` async function
+
+`bind:this` is a way to assign an element to a variable
+
+Fix accesibility issues, like tabindex, role etc
+
+### 7.4: Communicating lines edited via the size of the dots (optional)
+Add the *number of lines* as a third variable and map to the radius size. 
+
+Create a scale using `d3.scaleSqrt()` method and apply some opacity to dots.
+
+Linear scale vs Quadratic scale
+
+![](/static/images/middle/7-rscale.png)
+
+Sort in descending order to overlap small over large dots for easily hovering. Use `d3.sort(commits, d => -d.totalLines)`. The signs indicates, *descending*.
+
+Results
+![](/static/images/middle/7-rscale-output.png)
+
+### 7.5: Brushing
+See [A Tour through the Interaction Zoo](https://vis-society.github.io/lectures/interaction-zoo.html) for viz examples.
+
+#### 7.5.1: Setting up the brush
+`d3.select(svg).call(d3.brush())`
+
+With brushing our tooltip doesn't work inicially because D3 **adds a rectangle overlay over the entire chart that catches all mouse events**. Because of this, our circles never get hovered, and thus our tooltips never show.
+
+![](/static/images/middle/7-brush-overlay.png)
+
+To fix this we need the overlay to come before the dots in the DOM tree.
+D3 provides a `selection.raise()` method that moves one or more elements to the end of their parent, maintaining their relative order. 
+
+```
+d3.select(svg).selectAll(".dots, .overlay ~ *").raise();
+```
+> The ~ is the CSS subsequent sibling combinator and it selects elements that come after the selector that precedes it (and share the same parent).
+
+![](/static/images/middle/7-brush-overlay-fix.png)
+
+#### 7.5.3: Styling the selection rectangle (optional)
+
+The overlay is not the only element added by d3.brush(). There is a `<rect class="selection">` element that is used to depict the brush selection. So use CSS to style it!
+
+Use `global()` pseudo-class and animation to style your selection.
+
+<video src="./static/images/middle/7-brush-marching-ants.mp4" autoplay muted loop></video>
+
+#### 7.5.4: Making the brush actually select dots
+
+Follow this steps:
+
+Figure it out what the user has selected in terms of shapes (dots) and data (commits). Using `on()` to listen events fired by `d3.brush()`.
+
+<video src="./static/images/middle/7-brush-brush-events.mp4" autoplay muted loop></video>
+
+When brushing, the `selection` property is an array of two points that represent the top-left and bottom-right corners of the brush rectangle. Use a *reactive* variable called `brushSelection` to store these points and use a function `isCommitSelected` to check if a commit is inside this rectangule.
+
+Then we use `isCommitSelected` function to apply a `selected` class to the dots that are selected via a [class:selected](https://svelte.dev/docs/element-directives#class-name) directive.
+
+Finally style the dot `.selected` to change colors of the selected shapes.
+
+<video src="./static/images/middle/7-brush-selection.mp4" autoplay muted loop></video>
+
+#### 7.5.4(b): Showing count of selected commits
+Use brushSelection to count the commits
+
+<video src="./static/images/middle/7-brush-selected-commit-count.mp4" autoplay muted loop></video>
+
+#### 7.5.5: Showing breakdown of languages across all lines edited in selected commits
+Let’s display stats about the proportion of languages in the lines edited in the selected commits.
+
+You need a reactive variable called `languageBreakdown` that aggregates the number of lines per language of the reactive variable `selectedLines` which are the commits selected. 
+
+Then iterate over `languageBreakdown`
+```
+{#each languageBreakdown as [language, lines] }
+	<!-- Display stats here -->
+{/each}
+```
+> `<dl>` element is outside #each section to make the grid work properly.
+
+Results
+<video src="./static/images/middle/7-brush-lang-breakdown.mp4" autoplay muted loop></video>
+
+#### 7.5.6: Drawing a pie chart of the language breakdown
+Use the Pie component
+
+Results
+<video src="./static/images/middle/7-brush-final.mp4" autoplay muted loop></video>
