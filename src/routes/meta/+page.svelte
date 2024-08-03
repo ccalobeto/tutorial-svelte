@@ -30,6 +30,8 @@
 
   let svg;
   let brushSelection;
+  let selectedLines;
+  let languageBreakdown;
 
   onMount(async () => {
     data = await d3.csv("loc.csv", (row) => ({
@@ -135,6 +137,29 @@
     let isInsideShape = x >= x0 && x <= x1 && y >= y0 && y <= y1;
     return isInsideShape;
   }
+
+  $: selectedCommits = brushSelection ? commits.filter(isCommitSelected) : [];
+  $: hasSelection = brushSelection && selectedCommits.length > 0;
+
+  $: selectedLines = (hasSelection ? selectedCommits : commits).flatMap(
+    (d) => d.lines,
+  );
+  $: {
+    languageBreakdown = d3
+      .rollups(
+        selectedLines,
+        (v) => v.length,
+        (d) => d.type,
+      )
+      .map((d) => ({ language: d[0].toUpperCase(), lines: d[1] }));
+
+    languageBreakdown = d3.map(languageBreakdown, (d) => ({
+      ...d,
+      percentage: d.lines / d3.sum(languageBreakdown, (d) => d.lines),
+    }));
+  }
+
+  const formatter = d3.format(".1~%");
 </script>
 
 <!-- svelte-ignore css_unused_selector -->
@@ -187,8 +212,15 @@
   />
 </svg>
 <Tooltip commit={hoveredCommit} index={hoveredIndex} {cursor} />
-
+<p>{hasSelection ? selectedCommits.length : "No"} commits selected</p>
 {console.log(brushSelection)}
+
+<dl class="language">
+  {#each languageBreakdown as item}
+    <dt>{item.language}</dt>
+    <dd>{item.lines} lines ({formatter(item.percentage)})</dd>
+  {/each}
+</dl>
 
 <style>
   svg {
@@ -200,6 +232,7 @@
     grid-gap: 10px;
     padding: 10px;
     border-radius: 5px;
+    background-color: antiquewhite;
   }
 
   dt {
@@ -249,5 +282,31 @@
     stroke-dasharray: 5 3;
     background-color: pink;
     animation: marching-ants 2s linear infinite;
+  }
+  dl.language {
+    background-color: rgb(138, 77, 194);
+    display: grid;
+    grid-template-columns: repeat(auto, 1fr);
+    gap: 0.3em;
+    grid-gap: 5px;
+  }
+  .language dt {
+    color: gray;
+    font-weight: bold;
+    grid-row: 1;
+    font-size: 12px;
+  }
+  .language dd {
+    grid-row: 2;
+    font-size: 10px;
+    align-items: right;
+  }
+
+  .language dt:hover {
+    border: 1px solid yellowgreen;
+  }
+
+  .language dd:hover {
+    border: 1px solid yellowgreen;
   }
 </style>
