@@ -654,3 +654,6 @@ Use the Pie component
 
 Results
 <video src="./static/images/middle/7-brush-final.mp4" autoplay muted loop></video>
+
+### Warning
+> If you change public to private, you will miss your deploy. If you need to recover again change to public again and go to settings and choose Github Actions in <b>Build and deployment</b> section.
