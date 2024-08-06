@@ -2,6 +2,16 @@
 These are useful concepts to follow a successful carreer in data visualization. Taken from the course [vis-society](https://vis-society.github.io/) from MIT.
 All the lab progress are in the commits.
 
+# Table of Contents
+- [Setup](#lab-0-setup)
+- [1. Introduction to the Web platform](#lab-1-introduction-to-the-web-platform)
+- [2. Styling with CSS](#lab-2-styling-with-css)
+- [3. Introduction to JS](#lab-3-introduction-to-js)
+- [4. Svelte (Templating & Control Flow)](#lab-4-svelte-templating--control-flow)
+- [5. Svelte II (Loading Data & Reactivity)](#lab-5-svelte-ii-loading-data--reactivity)
+- [6. Visualizing categorical data with D3](#lab-6-visualizing-categorical-data-with-d3)
+- [7. Visualizing quantitative data with D3](#lab-7-visualizing-quantitative-data-with-d3)
+
 ## Lab 0. Setup
 Installation of tools:
 - Install *VS Code* and basic extensions
@@ -470,19 +480,25 @@ Aggregate stats with group, max, rollups
 `
 
 ### 7.2 Visualizing time and day of commits in a scatterplot
-- Set plot core dimensiones width, height and margins according to rule conventions.
-- Set scales of x and y domains.
-- Add `circle` element and sets their positions using these scales. 
-- Divide the plot into groups `g` for "dots", "axisX" and "axisY".
-- Use transfom into `g` element to translate both axis.
-- Adjust the axisY to look like hours, it use `string.padStart()` which formats it as a two digit number and finally, we append ":00" to it to make it look like a time.
--  Add horizontal grid lines, this time with no text and use the `axis.tickSize()` method to make the lines extend across the whole chart
+Set plot core dimensiones width, height and margins according to rule conventions.
+
+Set scales of x and y domains.
+
+Add `circle` element and sets their positions using these scales.
+
+Divide the plot into *svg* groups `g` for "dots", "axisX" and "axisY".
+
+Use `transfom`property of `g` element to translate both axis.
+
+Adjust the axisY to look like hours, it use `string.padStart()` which formats it as a two digit number and finally, we append ":00" to it to make it look like a time.
+
+Add horizontal grid lines, this time with no text and use the `axis.tickSize()` method to make the lines extend across the whole chart
+
 ```
-d3.select(yAxisGridlines).call(
-      d3.axisLeft(yScale)
-				.tickFormat("")
-				.tickSize(-usableArea.width),
-    );
+d3.select(yAxisGridlines)
+  .call(d3.axisLeft(yScale)
+	  .tickFormat("")
+		.tickSize(-usableArea.width))
 ```
 
 ### 7.3: Adding a tooltip 
