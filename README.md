@@ -87,6 +87,7 @@ A useful command to interact with dev tools is `$$` which give you a list of ele
 ```
 $$("*").length
 ```
+Video
 <video src="./static/images/3-js-console.mp4" autoplay muted loop></video>
 - Read about JS data types and object properties
 - In addition to object properties, their values can be functions
@@ -124,6 +125,8 @@ Performance, Less client-side JS and Easier syntax
 
 ### 4.1: Setting up
 Create a vis project
+![](./static/images/4-setup-npm-create.gif)
+
 ```
 $ npm create svelte@latest my-portfolio
 
@@ -142,7 +145,21 @@ npm run build
 
 You can preview the production build with `npm run preview`.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Something to know
+
+```bash
+FYI
+What does these commands lines do? 
+
+npm install: reads dependencies from package.json and installs the packages listed there.
+
+npm install -D svelte@next: will replace the Svelte version already installed with the latest pre-release version (which we need for modern CSS support).
+
+npm install -D @sveltejs/adapter-static: will install the static adapter for SvelteKit, which we will use to deploy our website to GitHub Pages
+```
+
+
+> **Warning**: To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
 
 ### 4.2: Porting your previous website to Svelte
 - First, copy your images/ folder as well as style.css and global.js to static/
