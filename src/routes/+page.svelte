@@ -1,9 +1,19 @@
 <script>
 	import mapboxgl from 'mapbox-gl';
 	import '../../node_modules/mapbox-gl/dist/mapbox-gl.css';
-	import { PUBLIC_MAPBOX_ACCESS_TOKEN } from '$env/static/public';
+	import { onMount } from 'svelte';
 
-	mapboxgl.accessToken = PUBLIC_MAPBOX_ACCESS_TOKEN;
+	mapboxgl.accessToken =
+		'pk.eyJ1IjoiY2NhbG9iZXRvIiwiYSI6ImNsemhhYzc3NjAyZjcybXEwc3pzbzg5aWcifQ.i8wSRm6K7eYFQAgS6T1W2g';
+
+	onMount(() => {
+		let map = new mapboxgl.Map({
+			container: 'map',
+			style: 'mapbox://styles/mapbox/streets-v12',
+			zoom: 12,
+			center: [-71.09415, 42.36027]
+		});
+	});
 </script>
 
 <title>Bike Watch</title>
@@ -13,7 +23,6 @@
 	in the Boston area during different times of the day.
 </p>
 
-{console.log(mapboxgl.accessToken)}
 <div id="map"></div>
 
 <style>
