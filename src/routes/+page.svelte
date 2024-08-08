@@ -7,6 +7,7 @@
 	let stations = [];
 	let map;
 	let mapViewChanged = 0;
+	let trips = [];
 
 	mapboxgl.accessToken =
 		'pk.eyJ1IjoiY2NhbG9iZXRvIiwiYSI6ImNsemhhYzc3NjAyZjcybXEwc3pzbzg5aWcifQ.i8wSRm6K7eYFQAgS6T1W2g';
@@ -68,6 +69,14 @@
 				Lat: +row.Lat,
 				Long: +row.Long,
 				'Total Docks': +row['Total Docks']
+			})
+		);
+
+		trips = await d3.csv(
+			'https://vis-society.github.io/labs/8/data/bluebikes-traffic-2024-03.csv',
+			(row) => ({
+				...row,
+				is_member: +row.is_member
 			})
 		);
 	});
