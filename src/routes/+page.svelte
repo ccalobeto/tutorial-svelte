@@ -72,7 +72,9 @@
 	in the Boston area during different times of the day.
 </p>
 
-<div id="map"></div>
+<div id="map">
+	<svg></svg>
+</div>
 
 <style>
 	@import url('$lib/global.css');
@@ -80,5 +82,15 @@
 	#map {
 		flex: 1;
 		background: yellowgreen;
+	}
+
+	#map svg {
+		/* background-color: yellow;
+		opacity: 0.5; */
+		position: absolute; /*work together to position on top of the map*/
+		z-index: 1; /*work together to position on top of the map*/
+		width: 100%; /*to make it fill the map container*/
+		height: 100%; /*to make it fill the map container*/
+		pointer-events: none; /* still pan and move the map */
 	}
 </style>
