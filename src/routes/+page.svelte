@@ -10,6 +10,7 @@
 	let trips = [];
 	let departures = [];
 	let arrivales = [];
+	let rScale;
 
 	mapboxgl.accessToken =
 		'pk.eyJ1IjoiY2NhbG9iZXRvIiwiYSI6ImNsemhhYzc3NjAyZjcybXEwc3pzbzg5aWcifQ.i8wSRm6K7eYFQAgS6T1W2g';
@@ -103,6 +104,11 @@
 		station.totalTraffic = station.arrivals + station.departures;
 		return station;
 	});
+
+	$: rScale = d3
+		.scaleSqrt()
+		.domain([0, d3.max(stations, (d) => d.totalTraffic)])
+		.range([0, 25]);
 </script>
 
 {console.log(stations)}
@@ -120,7 +126,7 @@
 				<circle
 					cx={getCoordinates(station).cx}
 					cy={getCoordinates(station).cy}
-					r="5"
+					r={rScale(station.totalTraffic)}
 					fill="steelblue"
 				/>
 			</svg>
@@ -144,5 +150,10 @@
 		width: 100%; /*to make it fill the map container*/
 		height: 100%; /*to make it fill the map container*/
 		pointer-events: none; /* still pan and move the map */
+	}
+
+	circle {
+		fill-opacity: 60%;
+		stroke: white;
 	}
 </style>
