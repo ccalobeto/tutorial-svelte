@@ -6,6 +6,7 @@
 
 	let stations = [];
 	let map;
+	let mapViewChanged = 0;
 
 	mapboxgl.accessToken =
 		'pk.eyJ1IjoiY2NhbG9iZXRvIiwiYSI6ImNsemhhYzc3NjAyZjcybXEwc3pzbzg5aWcifQ.i8wSRm6K7eYFQAgS6T1W2g';
@@ -70,6 +71,8 @@
 			})
 		);
 	});
+
+	$: map?.on('move', () => mapViewChanged++);
 </script>
 
 <title>Bike Watch</title>
@@ -80,16 +83,18 @@
 </p>
 
 <div id="map">
-	{#each stations as station}
-		<svg>
-			<circle
-				cx={getCoordinates(station).cx}
-				cy={getCoordinates(station).cy}
-				r="5"
-				fill="steelblue"
-			/>
-		</svg>
-	{/each}
+	{#key mapViewChanged}
+		{#each stations as station}
+			<svg>
+				<circle
+					cx={getCoordinates(station).cx}
+					cy={getCoordinates(station).cy}
+					r="5"
+					fill="steelblue"
+				/>
+			</svg>
+		{/each}
+	{/key}
 </div>
 
 <style>
