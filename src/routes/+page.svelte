@@ -22,6 +22,17 @@
 			type: 'geojson',
 			data: 'https://bostonopendata-boston.opendata.arcgis.com/datasets/boston::existing-bike-network-2022.geojson?outSR=%7B%22latestWkid%22%3A3857%2C%22wkid%22%3A102100%7D'
 		});
+
+		map.addLayer({
+			id: 'bike-routes',
+			type: 'line',
+			source: 'bike-routes',
+			paint: {
+				'line-color': 'green',
+				'line-width': 3,
+				'line-opacity': 0.4
+			}
+		});
 	});
 </script>
 
