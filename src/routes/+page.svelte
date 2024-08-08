@@ -8,6 +8,8 @@
 	let map;
 	let mapViewChanged = 0;
 	let trips = [];
+	let departures = [];
+	let arrivales = [];
 
 	mapboxgl.accessToken =
 		'pk.eyJ1IjoiY2NhbG9iZXRvIiwiYSI6ImNsemhhYzc3NjAyZjcybXEwc3pzbzg5aWcifQ.i8wSRm6K7eYFQAgS6T1W2g';
@@ -82,8 +84,28 @@
 	});
 
 	$: map?.on('move', () => mapViewChanged++);
+
+	$: departures = d3.rollup(
+		trips,
+		(v) => v.length,
+		(d) => d.start_station_id
+	);
+	$: arrivals = d3.rollup(
+		trips,
+		(v) => v.length,
+		(d) => d.end_station_id
+	);
+
+	$: stations = stations.map((station) => {
+		let id = station.Number;
+		station.arrivals = arrivals.get(id) ?? 0;
+		station.departures = departures.get(id) ?? 0;
+		station.totalTraffic = station.arrivals + station.departures;
+		return station;
+	});
 </script>
 
+{console.log(stations)}
 <title>Bike Watch</title>
 <h1>Bike Watch</h1>
 <p>
