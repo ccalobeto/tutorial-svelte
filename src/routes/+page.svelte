@@ -5,12 +5,19 @@
 	import * as d3 from 'd3';
 
 	let stations = [];
+	let map;
 
 	mapboxgl.accessToken =
 		'pk.eyJ1IjoiY2NhbG9iZXRvIiwiYSI6ImNsemhhYzc3NjAyZjcybXEwc3pzbzg5aWcifQ.i8wSRm6K7eYFQAgS6T1W2g';
 
+	function getCoordinates(station) {
+		let point = new mapboxgl.LngLat(station.Long, station.Lat);
+		let { x, y } = map.project(point);
+		return { cx: x, cy: y };
+	}
+
 	onMount(async () => {
-		let map = new mapboxgl.Map({
+		map = new mapboxgl.Map({
 			container: 'map',
 			style: 'mapbox://styles/mapbox/streets-v12',
 			zoom: 12,
@@ -73,7 +80,16 @@
 </p>
 
 <div id="map">
-	<svg></svg>
+	{#each stations as station}
+		<svg>
+			<circle
+				cx={getCoordinates(station).cx}
+				cy={getCoordinates(station).cy}
+				r="5"
+				fill="steelblue"
+			/>
+		</svg>
+	{/each}
 </div>
 
 <style>
