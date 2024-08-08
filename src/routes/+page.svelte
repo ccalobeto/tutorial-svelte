@@ -2,6 +2,9 @@
 	import mapboxgl from 'mapbox-gl';
 	import '../../node_modules/mapbox-gl/dist/mapbox-gl.css';
 	import { onMount } from 'svelte';
+	import * as d3 from 'd3';
+
+	let stations = [];
 
 	mapboxgl.accessToken =
 		'pk.eyJ1IjoiY2NhbG9iZXRvIiwiYSI6ImNsemhhYzc3NjAyZjcybXEwc3pzbzg5aWcifQ.i8wSRm6K7eYFQAgS6T1W2g';
@@ -49,6 +52,16 @@
 				'line-opacity': 0.8
 			}
 		});
+
+		stations = await d3.csv(
+			'https://vis-society.github.io/labs/8/data/bluebikes-stations.csv',
+			(row) => ({
+				...row,
+				Lat: +row.Lat,
+				Long: +row.Long,
+				'Total Docks': +row['Total Docks']
+			})
+		);
 	});
 </script>
 
