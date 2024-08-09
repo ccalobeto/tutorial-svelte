@@ -15,6 +15,8 @@
 	let arrivals = [];
 	let rScale;
 	let timeFilter = -1;
+	let departuresByMinute = Array.from({ length: 1440 }, () => []);
+	let arrivalsByMinute = Array.from({ length: 1440 }, () => []);
 
 	mapboxgl.accessToken =
 		'pk.eyJ1IjoiY2NhbG9iZXRvIiwiYSI6ImNsemhhYzc3NjAyZjcybXEwc3pzbzg5aWcifQ.i8wSRm6K7eYFQAgS6T1W2g';
@@ -27,6 +29,22 @@
 
 	function minutesSinceMidnight(date) {
 		return date.getHours() * 60 + date.getMinutes();
+	}
+
+	function filterByMinute(tripsByMinute, minute) {
+		// Normalize both to the [0, 1439] range
+		// % is the remainder operator: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder
+
+		let minMinute = (minute - 60 + 1440) % 1440;
+		let maxMinute = (minute + 60) % 1440;
+
+		if (minMinute > maxMinute) {
+			let beforeMidnight = tripsByMinute.slice(minMinute);
+			let afterMidnight = tripsByMinute.slice(0, maxMinute);
+			return beforeMidnight.concat(afterMidnight).flat();
+		} else {
+			return tripsByMinute.slice(minMinute, maxMinute).flat();
+		}
 	}
 
 	onMount(async () => {
@@ -84,6 +102,10 @@
 			for (let trip of trips) {
 				trip.started_at = new Date(trip.started_at);
 				trip.ended_at = new Date(trip.ended_at);
+				let startedMinutes = minutesSinceMidnight(trip.started_at);
+				let endedMinutes = minutesSinceMidnight(trip.ended_at);
+				departuresByMinute[startedMinutes].push(trip);
+				arrivalsByMinute[endedMinutes].push(trip);
 			}
 			return trips;
 		});
@@ -119,22 +141,13 @@
 		timeStyle: 'short'
 	});
 
-	$: filteredTrips =
-		timeFilter === -1
-			? trips
-			: trips.filter((trip) => {
-					let startedAt = minutesSinceMidnight(trip.started_at);
-					let endedAt = minutesSinceMidnight(trip.ended_at);
-					return Math.abs(startedAt - timeFilter) <= 60 || Math.abs(endedAt - timeFilter) < 60;
-				});
-
 	$: filteredDepartures = d3.rollup(
-		filteredTrips,
+		filterByMinute(departuresByMinute, timeFilter),
 		(v) => v.length,
 		(d) => d.start_station_id
 	);
 	$: filteredArrivals = d3.rollup(
-		filteredTrips,
+		filterByMinute(arrivalsByMinute, timeFilter),
 		(v) => v.length,
 		(d) => d.end_station_id
 	);
