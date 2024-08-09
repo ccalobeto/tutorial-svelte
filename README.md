@@ -136,3 +136,27 @@ Finally use {#key} block to force a re-render when a varible changes.
 
 Video
 <video src="./static/images/8-fix-panning.mp4" autoplay muted loop></video>
+
+## 8.4: Visualizing bike traffic
+Set the size of the circles according the amount of traffic at each station
+
+### 8.4.1: Importing and parsing the traffic data
+Fetch  'https://vis-society.github.io/labs/8/data/bluebikes-traffic-2024-03.csv' and call it `trips`.
+
+### 8.4.2: Calculating traffic at each station
+
+Use `d3.rollup()` to calculate arrivals, departures and total traffic to each station.
+
+Then add this properties to each station.
+
+### 8.4.3: Size markers according to traffic
+
+Adjust the radius of the circles to the total traffic.
+
+Style the circle for a better view.
+
+![](./static/images/8-visualization-stations-stroke.png)
+
+### 8.4.4: Adding a tooltip with exact traffic numbers (optional)
+Build a simple tooltip with title and add `pointer-events: auto` to our CSS rule for circle to recover displaying in the circles.
+
