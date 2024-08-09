@@ -9,8 +9,9 @@
 	let mapViewChanged = 0;
 	let trips = [];
 	let departures = [];
-	let arrivales = [];
+	let arrivals = [];
 	let rScale;
+	let timeFilter = -1;
 
 	mapboxgl.accessToken =
 		'pk.eyJ1IjoiY2NhbG9iZXRvIiwiYSI6ImNsemhhYzc3NjAyZjcybXEwc3pzbzg5aWcifQ.i8wSRm6K7eYFQAgS6T1W2g';
@@ -109,6 +110,10 @@
 		.scaleSqrt()
 		.domain([0, d3.max(stations, (d) => d.totalTraffic)])
 		.range([0, 25]);
+
+	$: timeFilterLabel = new Date(0, 0, 0, 0, timeFilter).toLocaleTimeString('en', {
+		timeStyle: 'short'
+	});
 </script>
 
 <title>Bike Watch</title>
@@ -117,11 +122,11 @@
 	<div class="time-filter">
 		<p>
 			<label for="time-slider">Filter by time: </label>
-			<input type="range" id="time-slider" min="-1" max="1440" />
+			<input type="range" id="time-slider" min="-1" max="1440" bind:value={timeFilter} />
 		</p>
 		<div class="time">
 			<em>(any time)</em>
-			<time>{new Date().toLocaleTimeString()}</time>
+			<time>{timeFilterLabel}</time>
 		</div>
 	</div>
 </header>
