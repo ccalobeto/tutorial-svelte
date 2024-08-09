@@ -111,7 +111,6 @@
 		.range([0, 25]);
 </script>
 
-{console.log(stations)}
 <title>Bike Watch</title>
 <h1>Bike Watch</h1>
 <p>
@@ -128,7 +127,12 @@
 					cy={getCoordinates(station).cy}
 					r={rScale(station.totalTraffic)}
 					fill="steelblue"
-				/>
+				>
+					<title
+						>{station.NAME}:
+						{station.totalTraffic} trips ({station.departures} departures, {station.arrivals} arrivals)
+					</title>
+				</circle>
 			</svg>
 		{/each}
 	{/key}
@@ -155,5 +159,6 @@
 	circle {
 		fill-opacity: 60%;
 		stroke: white;
+		pointer-events: auto;
 	}
 </style>
