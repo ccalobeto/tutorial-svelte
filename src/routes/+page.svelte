@@ -112,7 +112,22 @@
 </script>
 
 <title>Bike Watch</title>
-<h1>Bike Watch</h1>
+<header>
+	<h1>Bike Watch</h1>
+	<div class="time-filter">
+		<p>
+			<label for="time-slider">Filter by time: </label>
+			<input type="range" id="time-slider" min="-1" max="1440" />
+		</p>
+		<div class="time">
+			<em>(any time)</em>
+			<time>{new Date().toLocaleTimeString()}</time>
+		</div>
+	</div>
+</header>
+
+<div class="clock"></div>
+
 <p>
 	In this project, we will be building an immersive, interactive map visualization of bike traffic
 	in the Boston area during different times of the day.
@@ -160,5 +175,19 @@
 		fill-opacity: 60%;
 		stroke: white;
 		pointer-events: auto;
+	}
+
+	header {
+		display: flex;
+		gap: 1em;
+		align-items: baseline;
+	}
+
+	.time-filter {
+		margin-left: auto;
+	}
+
+	.time {
+		display: grid;
 	}
 </style>
