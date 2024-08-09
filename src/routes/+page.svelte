@@ -4,6 +4,9 @@
 	import { onMount } from 'svelte';
 	import * as d3 from 'd3';
 
+	const TRIP_DATA_URL = 'https://vis-society.github.io/labs/8/data/bluebikes-traffic-2024-03.csv';
+	const TRIP_STATIONS_URL = 'https://vis-society.github.io/labs/8/data/bluebikes-stations.csv';
+
 	let stations = [];
 	let map;
 	let mapViewChanged = 0;
@@ -20,6 +23,10 @@
 		let point = new mapboxgl.LngLat(station.Long, station.Lat);
 		let { x, y } = map.project(point);
 		return { cx: x, cy: y };
+	}
+
+	function minutesSinceMidnight(date) {
+		return date.getHours() * 60 + date.getMinutes();
 	}
 
 	onMount(async () => {
@@ -66,23 +73,20 @@
 			}
 		});
 
-		stations = await d3.csv(
-			'https://vis-society.github.io/labs/8/data/bluebikes-stations.csv',
-			(row) => ({
-				...row,
-				Lat: +row.Lat,
-				Long: +row.Long,
-				'Total Docks': +row['Total Docks']
-			})
-		);
+		stations = await d3.csv(TRIP_STATIONS_URL, (row) => ({
+			...row,
+			Lat: +row.Lat,
+			Long: +row.Long,
+			'Total Docks': +row['Total Docks']
+		}));
 
-		trips = await d3.csv(
-			'https://vis-society.github.io/labs/8/data/bluebikes-traffic-2024-03.csv',
-			(row) => ({
-				...row,
-				is_member: +row.is_member
-			})
-		);
+		trips = await d3.csv(TRIP_DATA_URL).then((trips) => {
+			for (let trip of trips) {
+				trip.started_at = new Date(trip.started_at);
+				trip.ended_at = new Date(trip.ended_at);
+			}
+			return trips;
+		});
 	});
 
 	$: map?.on('move', () => mapViewChanged++);
@@ -109,10 +113,39 @@
 	$: rScale = d3
 		.scaleSqrt()
 		.domain([0, d3.max(stations, (d) => d.totalTraffic)])
-		.range([0, 25]);
+		.range(timeFilter === -1 ? [0, 25] : [3, 50]);
 
 	$: timeFilterLabel = new Date(0, 0, 0, 0, timeFilter).toLocaleTimeString('en', {
 		timeStyle: 'short'
+	});
+
+	$: filteredTrips =
+		timeFilter === -1
+			? trips
+			: trips.filter((trip) => {
+					let startedAt = minutesSinceMidnight(trip.started_at);
+					let endedAt = minutesSinceMidnight(trip.ended_at);
+					return Math.abs(startedAt - timeFilter) <= 60 || Math.abs(endedAt - timeFilter) < 60;
+				});
+
+	$: filteredDepartures = d3.rollup(
+		filteredTrips,
+		(v) => v.length,
+		(d) => d.start_station_id
+	);
+	$: filteredArrivals = d3.rollup(
+		filteredTrips,
+		(v) => v.length,
+		(d) => d.end_station_id
+	);
+
+	$: filteredStations = stations.map((station) => {
+		station = { ...station }; // clone first
+		let id = station.Number;
+		station.arrivals = filteredArrivals.get(id) ?? 0;
+		station.departures = filteredDepartures.get(id) ?? 0;
+		station.totalTraffic = station.arrivals + station.departures;
+		return station;
 	});
 </script>
 
@@ -140,7 +173,7 @@
 
 <div id="map">
 	{#key mapViewChanged}
-		{#each stations as station}
+		{#each filteredStations as station}
 			<svg>
 				<circle
 					cx={getCoordinates(station).cx}
