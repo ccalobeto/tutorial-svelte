@@ -160,3 +160,117 @@ Style the circle for a better view.
 ### 8.4.4: Adding a tooltip with exact traffic numbers (optional)
 Build a simple tooltip with title and add `pointer-events: auto` to our CSS rule for circle to recover displaying in the circles.
 
+## 8.5: Interactive data filtering
+Let’s add some interactive filtering with a slider for arrival/departure time.
+
+### 8.5.1: Adding the HTML and CSS for the slider
+Add this elements 
+- A slider (`<input type=range>`) wiht min of -1 to 1440 (minutes per day).
+- A `<time>` element.
+- An `<em>(any time)</em>` element that will be shown when the slider is at -1.
+- A `<label>` around the slider and `<time>` element with some explanatory text (e.g. “Filter by time:”).
+
+Apply some styling.
+
+![](./static/images/8-filter-elements.png)
+
+### 8.5.2: Reactivity
+Create a `timeFilter` variable and use [bind:value](https://svelte.dev/docs/element-directives#bind-property) on the slider to **reactively** update its value as the slider is moved.
+
+Then define a reactive variable `timeFilterLabel` to display the updated value in `<time>` element.
+
+![](./static/images/8-interactive-slider.gif)
+
+### 8.5.3: Filtering the data
+We need to do:
+
+- Write code to obtain data that corresponds to the filter. So we are going to build: `filteredTrips`, `filteredArrivals`, `filteredDepartures` and `filteredStations`.
+
+- Update the HTML templates with new data.
+
+The slider shows the variable *number of minutes since midnight* and our trip data (`started_at` and `ended_at`) has string dates so we have to convert to dates first to compute the variable.
+
+**trip data** is a big data and we need to do the conversion once, so use `onMount()` just after the fetch with `then()`, a method of the `Promise`. 
+
+```js
+trips = await d3.csv(TRIP_DATA_URL).then((trips) => {
+			for (let trip of trips) {
+				trip.started_at = new Date(trip.started_at);
+				trip.ended_at = new Date(trip.ended_at);
+			}
+			return trips;
+		});
+```
+
+This function returns the number of minutes since midnight:
+
+```js
+function minutesSinceMidnight (date) {
+	return date.getHours() * 60 + date.getMinutes();
+}
+```
+
+Then, we can use this function to **filter the data to trips that started or ended within 1 hour before or after the selected time**:
+
+```js
+$: filteredTrips = timeFilter === -1? trips : trips.filter(trip => {
+	let startedMinutes = minutesSinceMidnight(trip.started_at);
+	let endedMinutes = minutesSinceMidnight(trip.ended_at);
+	return Math.abs(startedMinutes - timeFilter) <= 60
+	       || Math.abs(endedMinutes - timeFilter) <= 60;
+});
+```
+
+Like `filteredTrips`, create new data structures for `filteredArrivals`, `filteredDepartures`, and `filteredStations`. These are reactive statements because you are using a slicer and your visual data change.
+
+For `filteredStations` be careful and clone the `station` object before any operation to avoid any modification to your *original* station object since [in JS, objects are passed around by reference!](https://dev.to/bbarbour/passed-by-reference-vs-value-in-javascript-2fna).
+
+```js
+$: filteredStations = stations.map((station) => {
+		station = { ...station }; // clone first
+		let id = station.Number;
+		station.arrivals = filteredArrivals.get(id) ?? 0;
+		station.departures = filteredDepartures.get(id) ?? 0;
+		station.totalTraffic = station.arrivals + station.departures;
+		return station;
+	});
+```
+
+Finally, make a conditional scale in `rscale` to have bigger circles, since there's fewer data.
+```js
+.range(timeFilter === -1 ? [0, 25] : [3, 50]);
+```
+
+Video
+<video src="./static/images/8-filtering.mp4" autoplay muted loop></video>
+
+
+### 8.5.4: Performance optimizations (optional if you don’t have this problem)
+Notice that moving the slider now does not feel as smooth as it did before we implemented the filtering. This is because every time we move the slider, we filter the trips, which is a relatively expensive operation given that we have over a quarter of a million of them! Worse, every time we do this filtering, nothing else can happen until the filtering ends, including things like the browser updating the slider position! This is commonly referred to as “blocking the main thread”.
+
+There are many ways to improve this. [Throttling and debouncing](https://css-tricks.com/debouncing-throttling-explained-examples/) are two common techniques to limit the rate at which a certain (expensive) piece of code is called in response to user action.
+
+In this case, we can make the filtering a lot less expensive by presorting the trips into 1440 “buckets”, one for each minute of the day. Then, instead of going over 260 K trips every time the slider moves, we only need to go over the trips in the 1140 buckets corresponding to the selected time.
+
+So define arrays of 1440 elements
+```js
+let departuresByMinute = Array.from({length: 1440}, () => []);
+let arrivalsByMinute = Array.from({length: 1440}, () => []);
+```
+
+In `onMount()` append the trips per minute in the arrays `departuresByMinute` and `arrivalsByMinute`.
+
+Then filter the array by selecting the `timeFilter` variable associated to the HTML element. But it only works between 1AM and 11PM.
+```js
+departuresByMinute.slice(timeFilter - 60, timeFilter + 60).flat().
+```
+
+In these cases, we basically want two separate array.slice() operations: one for the times before midnight and one for those after, that we then combine.
+That's we do on `filterByMinute(tripsByMinute, minute)` function.
+
+Video
+<video src="./static/images/8-filter-optimized.mp4" autoplay muted loop></video>
+
+
+
+
