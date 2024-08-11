@@ -26,6 +26,17 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Create an .env file
+        env:
+          MAPBOX_API_KEY: ${{ secrets.SECRET_MAPBOX_API_ACCESS_TOKEN }} 
+        run: |
+          touch .env
+          echo "SECRET_MAPBOX_API_ACCESS_TOKEN=$MAPBOX_API_KEY" >> .env
+
+      - name: Display .env file
+        run: |
+          cat .env
+
       - name: build
         env:
           BASE_PATH: '/${{ github.event.repository.name }}'
