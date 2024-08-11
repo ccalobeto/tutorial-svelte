@@ -160,6 +160,8 @@
 		station.totalTraffic = station.arrivals + station.departures;
 		return station;
 	});
+
+	let stationFlow = d3.scaleQuantize().domain([0, 1]).range([0, 0.5, 1]);
 </script>
 
 <title>Bike Watch</title>
@@ -192,7 +194,7 @@
 					cx={getCoordinates(station).cx}
 					cy={getCoordinates(station).cy}
 					r={rScale(station.totalTraffic)}
-					fill="steelblue"
+					style="--departure-ratio:{stationFlow(station.departures / station.totalTraffic)}"
 				>
 					<title
 						>{station.NAME}:
@@ -226,6 +228,14 @@
 		fill-opacity: 60%;
 		stroke: white;
 		pointer-events: auto;
+		--color-departures: steelblue;
+		--color-arrivals: darkorange;
+		--color: color-mix(
+			in oklch,
+			var(--color-departures) calc(100% * var(--departure-ratio)),
+			var(--color-arrivals)
+		);
+		fill: var(--color);
 	}
 
 	header {
