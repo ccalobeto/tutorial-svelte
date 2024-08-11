@@ -124,6 +124,8 @@ The map breaks down if we try to span, zoom or rotate. Here we will fix it!
 Video
 <video src="./static/images/8-fix-station-zooming-splatters.mp4" autoplay muted loop></video>
 
+https://github.com/user-attachments/assets/4e5aa0ca-296d-4fb5-94b8-fa55d65daa38
+
 
 Svelte's reactivity is not working as expected because zooming and panning changed too. These side effects (dependencies that are not visible in the code), we need to take care of updating the state ourselves. 
 
@@ -135,6 +137,9 @@ Finally use {#key} block to force a re-render when a varible changes.
 
 Video
 <video src="./static/images/8-fix-panning.mp4" autoplay muted loop></video>
+
+https://github.com/user-attachments/assets/54120f51-128a-4ef5-ac13-60b2b1858eef
+
 
 ## 8.4: Visualizing bike traffic
 Set the size of the circles according the amount of traffic at each station
@@ -243,6 +248,8 @@ Finally, make a conditional scale in `rscale` to have bigger circles, since ther
 Video
 <video src="./static/images/8-filtering.mp4" autoplay muted loop></video>
 
+https://github.com/user-attachments/assets/7d694862-95fd-417b-8135-24d93a235309
+
 
 ### 8.5.4: Performance optimizations (optional if you don’t have this problem)
 Notice that moving the slider now does not feel as smooth as it did before we implemented the filtering. This is because every time we move the slider, we filter the trips, which is a relatively expensive operation given that we have over a quarter of a million of them! Worse, every time we do this filtering, nothing else can happen until the filtering ends, including things like the browser updating the slider position! This is commonly referred to as “blocking the main thread”.
@@ -270,6 +277,10 @@ That's we do on `filterByMinute(tripsByMinute, minute)` function.
 Video
 <video src="./static/images/8-filter-optimized.mp4" autoplay muted loop></video>
 
+
+https://github.com/user-attachments/assets/c83fa352-8ad9-4a04-8bfb-a70cca1b5a42
+
+
 ## 8.6: Visualizing traffic flow 
 In this step, we will use circle color to visualize traffic flow at different times of the day.
 
@@ -284,6 +295,10 @@ And by CSS, assign the color.
 
 Video
 <video src="./static/images/8-traffic-flow.mp4" autoplay muted loop></video>
+
+
+https://github.com/user-attachments/assets/3a7ff954-ba96-4761-93e0-f0b0e4d19c89
+
 
 ### 8.6.2: Adding a legend
 Add a color to the three color legend
