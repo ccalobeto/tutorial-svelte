@@ -206,6 +206,12 @@
 	</svg>
 </div>
 
+<div class="legend">
+	<div style="--departure-ratio: 1">More departures</div>
+	<div style="--departure-ratio: 0.5">Balanced</div>
+	<div style="--departure-ratio: 0">More arrivals</div>
+</div>
+
 <style>
 	@import url('$lib/global.css');
 
@@ -228,6 +234,11 @@
 		fill-opacity: 60%;
 		stroke: white;
 		pointer-events: auto;
+		fill: var(--color);
+	}
+
+	#map circle,
+	.legend > div {
 		--color-departures: steelblue;
 		--color-arrivals: darkorange;
 		--color: color-mix(
@@ -235,9 +246,7 @@
 			var(--color-departures) calc(100% * var(--departure-ratio)),
 			var(--color-arrivals)
 		);
-		fill: var(--color);
 	}
-
 	header {
 		display: flex;
 		gap: 1em;
@@ -250,5 +259,17 @@
 
 	.time {
 		display: grid;
+	}
+
+	.legend {
+		display: flex;
+		margin-block: 1em;
+	}
+	.legend > div {
+		flex: 1;
+		gap: 1px;
+		text-align: center;
+		background-color: var(--color);
+		color: white;
 	}
 </style>
