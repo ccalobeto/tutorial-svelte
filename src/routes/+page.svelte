@@ -187,9 +187,9 @@
 </p>
 
 <div id="map">
-	{#key mapViewChanged}
-		{#each filteredStations as station}
-			<svg>
+	<svg>
+		{#key mapViewChanged}
+			{#each filteredStations as station}
 				<circle
 					cx={getCoordinates(station).cx}
 					cy={getCoordinates(station).cy}
@@ -201,9 +201,9 @@
 						{station.totalTraffic} trips ({station.departures} departures, {station.arrivals} arrivals)
 					</title>
 				</circle>
-			</svg>
-		{/each}
-	{/key}
+			{/each}
+		{/key}
+	</svg>
 </div>
 
 <style>
