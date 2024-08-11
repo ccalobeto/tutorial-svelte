@@ -1,11 +1,9 @@
 # Notes
 Follows from [svelte-porfolio](https://github.com/ccalobeto/svelte-portfolio/).
 
-# Table of contents
-
 # Lab 8: Geospatial visualizations
 ## 8.0 Setup
-Create a project folling these [steps](https://github.com/ccalobeto/svelte-portfolio/blob/main/README.md#lab-4-svelte-templating--control-flow)
+Create a project following these [steps](https://github.com/ccalobeto/svelte-portfolio/blob/main/README.md#lab-4-svelte-templating--control-flow)
 
 Publish your project
 
@@ -125,6 +123,7 @@ The map breaks down if we try to span, zoom or rotate. Here we will fix it!
 
 Video
 <video src="./static/images/8-fix-station-zooming-splatters.mp4" autoplay muted loop></video>
+
 
 Svelte's reactivity is not working as expected because zooming and panning changed too. These side effects (dependencies that are not visible in the code), we need to take care of updating the state ourselves. 
 
@@ -270,6 +269,29 @@ That's we do on `filterByMinute(tripsByMinute, minute)` function.
 
 Video
 <video src="./static/images/8-filter-optimized.mp4" autoplay muted loop></video>
+
+## 8.6: Visualizing traffic flow 
+In this step, we will use circle color to visualize traffic flow at different times of the day.
+
+### 8.6.1: Make circle color depend on traffic flow
+Colors associated with discrete output. 
+
+Use `stationFlow` quantize scale function. Notice that this is not a reactive statement, since it does not depend on any variables.
+
+Calculate the `departure-ratio` inside *style* property of the circle.
+
+And by CSS, assign the color. 
+
+Video
+<video src="./static/images/8-traffic-flow.mp4" autoplay muted loop></video>
+
+### 8.6.2: Adding a legend
+Add a color to the three color legend
+
+![](./static/images/8-legend-blocks.png)
+
+> [!WARNING]
+> Strange things happen with multiple svgs in mobile browser.
 
 
 
