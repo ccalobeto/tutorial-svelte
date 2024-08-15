@@ -30,7 +30,6 @@
   let cursor = { x: 0, y: 0 };
 
   let svg;
-  let brushSelection;
   let selectedLines;
   let languageBreakdown;
 
@@ -123,24 +122,24 @@
   }
 
   function brushed(event) {
-    // console.log(event.selection);
-    brushSelection = event.selection;
-    return brushSelection;
+    let brushSelection = event.selection;
+    selectedCommits = !brushSelection
+      ? []
+      : commits.filter((commit) => {
+          let [[x0, y0], [x1, y1]] = brushSelection;
+          let x = xScale(commit.date);
+          let y = yScale(commit.hourFrac);
+          let isInsideShape = x >= x0 && x <= x1 && y >= y0 && y <= y1;
+          return isInsideShape;
+        });
   }
 
   function isCommitSelected(commit) {
-    if (!brushSelection) {
-      return false;
-    }
-    let [[x0, y0], [x1, y1]] = brushSelection;
-    let x = xScale(commit.date);
-    let y = yScale(commit.hourFrac);
-    let isInsideShape = x >= x0 && x <= x1 && y >= y0 && y <= y1;
-    return isInsideShape;
+    return selectedCommits.includes(commit);
   }
 
-  $: selectedCommits = brushSelection ? commits.filter(isCommitSelected) : [];
-  $: hasSelection = brushSelection && selectedCommits.length > 0;
+  let selectedCommits = [];
+  $: hasSelection = selectedCommits.length > 0;
 
   $: selectedLines = (hasSelection ? selectedCommits : commits).flatMap(
     (d) => d.lines,
@@ -214,7 +213,6 @@
 </svg>
 <Tooltip commit={hoveredCommit} index={hoveredIndex} {cursor} />
 <p>{hasSelection ? selectedCommits.length : "No"} commits selected</p>
-{console.log(brushSelection)}
 
 <dl class="language">
   {#each languageBreakdown as item}
