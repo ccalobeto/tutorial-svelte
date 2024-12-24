@@ -1,3 +1,7 @@
+import stories from "$data/stories.csv";
+
 export async function load() {
-	return {};
+	return {
+		data: stories
+	};
 }
