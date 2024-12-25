@@ -9,7 +9,7 @@
 
 <!-- <Footer recirc={true} /> -->
 <h1>the pudding</h1>
+<a href="/about">about</a>
 {#each data as { hed }}
 	<p>{hed}</p>
 {/each}
-<a href="/about">about</a>
