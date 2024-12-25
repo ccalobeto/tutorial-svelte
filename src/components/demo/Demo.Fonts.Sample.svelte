@@ -78,11 +78,11 @@
 		white-space: pre-wrap;
 	}
 
-	button {
+	/* button {
 		font-family: var(--mono);
 	}
 
 	span {
 		margin-left: 16px;
-	}
+	} */
 </style>

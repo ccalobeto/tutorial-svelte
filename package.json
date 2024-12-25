@@ -8,7 +8,9 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"lint": "prettier --check --plugin-search-dir=. .",
-		"format": "prettier --write --plugin-search-dir=. ."
+		"format": "prettier --write --plugin-search-dir=. .",
+		"fetch-og-images": "node tasks/fetch-og-images.js",
+		"thumbnail-og": "node tasks/thumbnail-og.js"
 	},
 	"devDependencies": {
 		"@rollup/plugin-dsv": "^3.0.5",
@@ -19,7 +21,10 @@
 		"autoprefixer": "^10.4.20",
 		"bits-ui": "^1.0.0-next.65",
 		"d3": "^7.9.0",
+		"jimp": "^1.6.0",
+		"jsdom": "^25.0.1",
 		"lodash.debounce": "^4.0.8",
+		"mkdirp": "^3.0.1",
 		"postcss": "^8.4.49",
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.2",

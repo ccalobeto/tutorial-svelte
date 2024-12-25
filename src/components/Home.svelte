@@ -1,5 +1,6 @@
-<script lang="ts">
+<script>
 	import { getContext } from "svelte";
+	import { base } from "$app/paths";
 	// import Footer from "$components/Footer.svelte";
 
 	// const copy = getContext("copy");
@@ -9,7 +10,7 @@
 
 <!-- <Footer recirc={true} /> -->
 <h1>the pudding</h1>
+<a href="{base}/about">about</a>
 {#each data as { hed }}
 	<p>{hed}</p>
 {/each}
-<a href="/about">about</a>
