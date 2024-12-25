@@ -1,4 +1,4 @@
-# Generating code in pudding
+# Making a complete website in pudding
 
 ## Part 1
 ### Data generation
@@ -17,5 +17,22 @@ npm run gdoc
 - Create author route and dynamic page `[author].svelte`
 
 ## Part 2
+### Using subdirectories in Github
+- To test local build add environment variable. Check if you need to add the variable in github for *production* build.
+```zh
+export NODE_ENV=development
+```
+
+- Add subdirectory, so modify your `path.base` in `svelte.config.js` and modify the `a` tag with `href="{base}/about"`
+
+### Image Transformation
+The mission is to use resizes to lower bandwidth
+
+- Copy the `tasks/fetch-og-images.js` script to fetch images from [the pudding](https://github.com/the-pudding/website).
+
+- Copy the `tasks/thumbnail-og.js` script to resize images from [the pudding](https://github.com/the-pudding/website).
+
+> [!IMPORTANT]
+> You will need to install some additional packages to run the scripts. 
 
 
