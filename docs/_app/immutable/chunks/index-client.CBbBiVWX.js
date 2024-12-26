@@ -1,0 +1,1 @@
+import{l as e,u as t,m as c}from"./runtime.Ctd-Fm3Y.js";function u(n){throw new Error("lifecycle_outside_component")}function r(n){e===null&&u(),t(()=>{const o=c(n);if(typeof o=="function")return o})}export{r as o};
