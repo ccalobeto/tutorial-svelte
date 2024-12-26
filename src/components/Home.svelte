@@ -11,6 +11,8 @@
 <!-- <Footer recirc={true} /> -->
 <h1>the pudding</h1>
 <a href="{base}/about">about</a>
-{#each data as { hed }}
-	<p>{hed}</p>
+{#each data as { hed, dek, slug }}
+	<h3>{hed}</h3>
+	<p>{dek}</p>
+	<p>{slug}</p>
 {/each}
