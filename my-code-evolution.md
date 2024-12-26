@@ -35,4 +35,9 @@ The mission is to use resizes to lower bandwidth
 > [!IMPORTANT]
 > You will need to install some additional packages to run the scripts. 
 
+## Part 3
+- Doing some refactoring (a separate script for filtering stories)
+- Render hed and slug. Don't forget to add keys before rendering the page in `Home.svelte` component.
+- Move loading data from `+page.server.js` to an **api**.
+
 
