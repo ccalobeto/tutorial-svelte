@@ -1,8 +1,12 @@
 # Making a complete website in pudding
 
+## Diagram
+![](/static/assets/diagram/pudding-template-drawio.svg)
+
 ## Part 1
 ### Data generation
 Go to [stories](https://docs.google.com/spreadsheets/d/1hIIwnbmcIpRlygNZNY6SAnKFzAI79QROcrCglQhoZyQ/edit?gid=0#gid=0) and [authors](https://docs.google.com/spreadsheets/d/1jFlS8Ghkat-h2W27Q2YfoXRV5RuNFY_ML6hiirMa6HM/edit?gid=0#gid=0), then adjust `google.config.js` following the [rules](https://github.com/the-pudding/svelte-starter#google-docs-and-sheets)
+
 ```zsh
 npm run gdoc
 ```
@@ -36,8 +40,14 @@ The mission is to use resizes to lower bandwidth
 > You will need to install some additional packages to run the scripts. 
 
 ## Part 3
-- Doing some refactoring (a separate script for filtering stories)
+- Refactor, create a separate script for filtering stories)
 - Render hed and slug. Don't forget to add keys before rendering the page in `Home.svelte` component.
 - Move loading data from `+page.server.js` to an **api**.
 
-
+## Part 4
+### Add thumbernails
+### Given a list of images filter data
+### Author's page creation
+- Change the way of loading and cleaning a csv file
+- Create an author's page component
+- Create a *page.js* that use an author that fetches a request to an *api* that filter his stories.
