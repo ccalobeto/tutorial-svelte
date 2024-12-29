@@ -51,3 +51,4 @@ The mission is to use resizes to lower bandwidth
 - Change the way of loading and cleaning a csv file
 - Create an author's page component
 - Create a *page.js* that use an author that fetches a request to an *api* that filter his stories.
+- Be careful if you use subdirectories. Add `{base}` to your *url* to `fetch`
