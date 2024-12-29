@@ -10,9 +10,22 @@
 
 <!-- <Footer recirc={true} /> -->
 <h1>the pudding</h1>
-<a href="{base}/about">about</a>
-{#each data as { hed, dek, slug }}
-	<h3>{hed}</h3>
-	<p>{dek}</p>
-	<p>{slug}</p>
+{#each data as { hed, dek, url, slug }}
+	<a href="https://pudding.cool/{url}" rel="external">
+		<img src="common/assets/thumbnails/640/{slug}.jpg" alt={hed} />
+		<h2>{hed}</h2>
+		<p>{dek}</p>
+	</a>
 {/each}
+
+<a href="{base}/about">about</a>
+
+<style>
+	a {
+		display: block;
+	}
+
+	img {
+		max-width: 30em;
+	}
+</style>
