@@ -1,7 +1,7 @@
 /** @type {import('./$types').PageLoad} */
 import { base } from "$app/paths";
 export async function load({ params, fetch }) {
-  const url = `${base}/api/authors/${params.slug}`
+  const url = `${base}/api/authors/${params.slug}`;
   const response = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
