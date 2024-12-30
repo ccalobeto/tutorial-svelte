@@ -12,7 +12,11 @@
 <h1>the pudding</h1>
 {#each data as { hed, dek, url, slug }}
 	<a href="https://pudding.cool/{url}" rel="external">
-		<img src="common/assets/thumbnails/640/{slug}.jpg" alt={hed} />
+		<img
+			src="common/assets/thumbnails/640/{slug}.jpg"
+			alt={hed}
+			loading="lazy"
+		/>
 		<h2>{hed}</h2>
 		<p>{dek}</p>
 	</a>
