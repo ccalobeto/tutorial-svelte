@@ -6,3 +6,9 @@
 {#each stories as story}
 	<h3>{story.hed}</h3>
 {/each}
+
+<style>
+	h1 {
+		font-family: var(--sans);
+	}
+</style>
