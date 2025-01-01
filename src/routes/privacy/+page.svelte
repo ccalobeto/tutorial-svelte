@@ -1,7 +1,7 @@
 <script>
 	import Meta from "$components/Meta.svelte";
-	import About from "$components/About.svelte";
+	import Privacy from "$components/Privacy.svelte";
 </script>
 
 <Meta />
-<About />
+<Privacy />

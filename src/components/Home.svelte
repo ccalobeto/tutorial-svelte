@@ -9,7 +9,11 @@
 </script>
 
 <!-- <Footer recirc={true} /> -->
-<h1>the pudding</h1>
+<a href="{base}/about">About</a>
+<a href="{base}/pitch">Pitch</a>
+<a href="{base}/privacy">Privacy</a>
+<a href="{base}/faq">FAQ</a>
+
 {#each data as { hed, dek, url, slug }}
 	<a href="https://pudding.cool/{url}" rel="external">
 		<div class="thumbnail">
@@ -24,8 +28,6 @@
 		</div>
 	</a>
 {/each}
-
-<a href="{base}/about">about</a>
 
 <style>
 	a {
