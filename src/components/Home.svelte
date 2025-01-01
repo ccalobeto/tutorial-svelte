@@ -12,13 +12,16 @@
 <h1>the pudding</h1>
 {#each data as { hed, dek, url, slug }}
 	<a href="https://pudding.cool/{url}" rel="external">
-		<img
-			src="common/assets/thumbnails/640/{slug}.jpg"
-			alt={hed}
-			loading="lazy"
-		/>
-		<h2>{hed}</h2>
-		<p>{dek}</p>
+		<div class="thumbnail">
+			<img
+				src="common/assets/thumbnails/640/{slug}.jpg"
+				alt={hed}
+				loading="lazy"
+			/>
+
+			<h2>{hed}</h2>
+			<p>{dek}</p>
+		</div>
 	</a>
 {/each}
 
@@ -31,5 +34,9 @@
 
 	img {
 		max-width: 30em;
+	}
+
+	.thumbnail {
+		padding: 4em;
 	}
 </style>
