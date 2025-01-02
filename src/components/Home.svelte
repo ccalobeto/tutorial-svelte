@@ -1,6 +1,7 @@
 <script>
-	import { getContext } from "svelte";
+	// import { getContext } from "svelte";
 	import { base } from "$app/paths";
+	import copy from "$data/home.json";
 	// import Footer from "$components/Footer.svelte";
 
 	// const copy = getContext("copy");
@@ -9,7 +10,12 @@
 </script>
 
 <!-- <Footer recirc={true} /> -->
-<h1>the pudding</h1>
+<h1>{copy.title}</h1>
+<a href="{base}/about">About</a>
+<a href="{base}/pitch">Pitch</a>
+<a href="{base}/privacy">Privacy</a>
+<a href="{base}/faq">FAQ</a>
+
 {#each data as { hed, dek, url, slug }}
 	<a href="https://pudding.cool/{url}" rel="external">
 		<div class="thumbnail">
@@ -24,8 +30,6 @@
 		</div>
 	</a>
 {/each}
-
-<a href="{base}/about">about</a>
 
 <style>
 	a {

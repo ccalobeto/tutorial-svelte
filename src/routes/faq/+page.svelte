@@ -1,7 +1,7 @@
 <script>
 	import Meta from "$components/Meta.svelte";
-	import About from "$components/About.svelte";
+	import Faq from "$components/Faq.svelte";
 </script>
 
 <Meta />
-<About />
+<Faq />

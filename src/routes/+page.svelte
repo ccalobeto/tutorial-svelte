@@ -6,6 +6,7 @@
 	import Meta from "$components/Meta.svelte";
 	import Home from "$components/Home.svelte";
 	import version from "$utils/version.js";
+	import Footer from "$components/Footer.svelte";
 
 	let { data } = $props();
 
@@ -25,3 +26,4 @@
 
 <Meta {title} {description} {url} {preloadFont} {keywords} />
 <Home data={data.data} />
+<Footer />

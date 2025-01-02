@@ -1,7 +1,7 @@
 <script>
 	import Meta from "$components/Meta.svelte";
-	import About from "$components/About.svelte";
+	import Pitch from "$components/Pitch.svelte";
 </script>
 
 <Meta />
-<About />
+<Pitch />

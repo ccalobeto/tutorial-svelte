@@ -52,3 +52,20 @@ The mission is to use resizes to lower bandwidth
 - Create an author's page component
 - Create a *page.js* that use an author that fetches a request to an *api* that filter his stories.
 - Be careful if you use subdirectories. Add `{base}` to your *url* to `fetch`
+
+## Part 8
+### Another way to fetch data from csv file
+### Some css styling: padding
+
+## Part 9
+### Extract data from doc files 
+Use data in doc files to be displayed in components. A history could be made from a writer's story and you extract those pieces of text to be rendered into components. Use **tags**.
+- These doc files with markup are hosted in Drive. Be sure to share the folder.
+- Add the id doc in google.config.js and set the output.
+![](/static/documentation/google-doc-url.png)
+- Generate the `json` file with this command
+```zh
+npm run gdoc
+```
+
+
