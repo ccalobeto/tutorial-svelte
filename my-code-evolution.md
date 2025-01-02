@@ -69,7 +69,9 @@ npm run gdoc
 ```
 
 ## Part 10
-
+- The dev shows how they use **Figma** to design the digital content.
 - Add an intro to *The pudding* through `website: home copy`
-- It is not practical that your team type a href, so make it dynamic inside `[]`. See since 50:39.
+- It is not practical that your team type a href in a doc file, so make it dynamic using `[popular]` in docs that refers to interesting stories of *The Pudding*, see since 50:39.
 
+## Part 11
+- Do more dynamic render content with google docs. The entire video is related to this.
