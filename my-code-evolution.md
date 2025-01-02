@@ -68,4 +68,8 @@ Use data in doc files to be displayed in components. A history could be made fro
 npm run gdoc
 ```
 
+## Part 10
+
+- Add an intro to *The pudding* through `website: home copy`
+- It is not practical that your team type a href, so make it dynamic inside `[]`. See since 50:39.
 
