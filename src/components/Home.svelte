@@ -15,6 +15,7 @@
 <a href="{base}/pitch">Pitch</a>
 <a href="{base}/privacy">Privacy</a>
 <a href="{base}/faq">FAQ</a>
+<a href="{base}/author/amber-thomas">Amber Thomas</a>
 
 {#each data as { hed, dek, url, slug }}
 	<a href="https://pudding.cool/{url}" rel="external">
