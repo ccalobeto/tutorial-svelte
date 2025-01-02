@@ -33,5 +33,9 @@ export default [
 		"id": "1oc1-q8i1FWhgsZ7tQ6UfjGl3WQ8O57cCFn858qbvATM",
 		"filepath": "src/data/pitch.json"
 	},
+	{
+		"id": "1-9hbySKacP35o00i5biajgzjvQV6l8xHHpwAgE63ORQ",
+		"filepath": "src/data/misc.json"
+	},
 
 ]
