@@ -1,8 +1,8 @@
 <script>
 	// import { getContext } from "svelte";
 	import { base } from "$app/paths";
-	import copy from "$data/home.json";
 	// import Footer from "$components/Footer.svelte";
+	import Intro from "$components/Home.Intro.svelte";
 
 	// const copy = getContext("copy");
 	// const data = getContext("data");
@@ -10,7 +10,7 @@
 </script>
 
 <!-- <Footer recirc={true} /> -->
-<h1>{copy.title}</h1>
+<Intro />
 <a href="{base}/about">About</a>
 <a href="{base}/pitch">Pitch</a>
 <a href="{base}/privacy">Privacy</a>
