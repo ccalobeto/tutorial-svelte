@@ -1,1 +1,5 @@
-<h1>FAQ component</h1>
+<script>
+	import copy from "$data/faq.json";
+</script>
+
+<h1>{copy.title}</h1>
