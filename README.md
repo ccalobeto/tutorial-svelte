@@ -1,6 +1,8 @@
 # Notes
-These are useful concepts to follow a successful carreer in data visualization. Taken from the course [vis-society](https://vis-society.github.io/) from MIT.
+These are useful concepts to follow a successful carreer in data visualization. Taken from the [vis-society](https://vis-society.github.io/) course from MIT.
 All the lab progress are in the commits.
+
+The course has two parts. [The dashboard](https://github.com/ccalobeto/svelte-vis-2) is the other one.
 
 # Table of Contents
 - [Setup](#lab-0-setup)
@@ -15,7 +17,7 @@ All the lab progress are in the commits.
 ## Lab 0. Setup
 Installation of tools:
 - Install *VS Code* and basic extensions
-- Learn *git* commands and *Github*
+- Intermediate based in *git* commands and *Github*
 - Learn how to use *Node.js* and *npm*
 - Install extension *Live Server* in VS Code
 - Install extension *for Svelte* in VS Code
@@ -23,13 +25,17 @@ Installation of tools:
 ## Lab 1: Introduction to the Web platform
 This is a starting point of web development
 ### 1.1 Some Web fundamentals
-- Other useful courses are [6.813/6.831: User Interface Design & Implementation](https://web.mit.edu/6.813/www/sp18/) and [6.S063 Design for the web: Languages and User Interfaces](https://designftw.mit.edu/)
-- Relative URL concepts:
-	 If a relative URL starts with a `'/'`, it is relative to the root of the host. `..` means "go up one level" and `.` refers to the current directory.
-- Going through web development, remember that it is possible to have `<script>` elements without type="module", but we recommend you always use type="module" as it enables a few modern JS features and prevents certain errors.
-- Error handling in web development
+Other useful courses are [6.813/6.831: User Interface Design & Implementation](https://web.mit.edu/6.813/www/sp18/) and [6.S063 Design for the web: Languages and User Interfaces](https://designftw.mit.edu/)
+
+Relative URL concepts: 
+If a relative URL starts with a `'/'`, it is relative to the root of the host. `..` means "go up one level" and `.` refers to the current directory.
+
+Going through web development, remember that it is possible to have `<script>` elements without type="module", but we recommend you always use type="module" as it enables a few modern JS features and prevents certain errors.
+
+Error handling in web development
 ![](./static/images/1-web-error.png)
-- HTML cheatsheet
+
+HTML cheatsheet
 ![](./static/images/1-web-cheatsheet.png)
 
 ### 1.2 Creating our own website from scratch and publishing it on the Web
@@ -37,20 +43,27 @@ Create a simple website and publish in GitHub. It should have: introduction text
 
 ## Lab 2: Styling with CSS
 ### Slides
-- Every HTML element produces a box
-- CSS concepts
+Every HTML element produces a box.
+
+CSS concepts
 `display:flex` or `display:grid`
 ![](./static/images/2-css-layout.png)
-- HTML pages are trees
+
+HTML pages are trees
 ![](./static/images/2-css-tree.png)
-- Styling
+
+Styling
 ![](./static/images/2-css-styling.png)
-- Targeting
+
+Targeting
 ![](./static/images/2-css-targeting.png)
-- Pseudo classes
+
+Pseudo classes
 ![](./static/images/2-css-pseudo.png)
-- Reactivity
+
+Reactivity
 ![](./static/images/2-css-reactivity.png)
+
 - If there is a duplicate declaration in CSS, the last one wins!
 - Even if you don't apply any CSS to your page, the browser will do.
 - Being specificitty
@@ -80,22 +93,28 @@ svelte-portfolio/static/style.css
 
 ## Lab 3: Introduction to JS
 ### Slides
-- JS is a language that runs in the browser (but can also run on the server, in native applications, etc.)
-- The console for debugging 
+JS is a language that runs in the browser (but can also run on the server, in native applications, etc.)
+
+The console for debugging
 
 A useful command to interact with dev tools is `$$` which give you a list of elements matching a selector
+
 ```
 $$("*").length
 ```
 Video
 <video src="./static/images/3-js-console.mp4" autoplay muted loop></video>
-- Read about JS data types and object properties
-- In addition to object properties, their values can be functions
+
+<u>Read about JS data types and object properties.</u>
+
+In addition to object properties, their values can be functions
 ![](./static/images/3-js-method-calls.gif)
-- Reference elements
+
+How to reference elements
 ![](./static/images/3-js-elements.png)
 ![](./static/images/3-js-elements-2.png)
-- Events
+
+Work with events
 ![](./static/images/3-js-events.gif)
 
 ### Lab
@@ -110,16 +129,21 @@ From an array pass data to set the nav links
 
 ## Lab 4: Svelte (Templating & Control Flow)
 ### Slides
-- *npm* is a package manager such as *pip* or *brew*
-- Build process
+*npm* is a package manager such as *pip* or *brew*
+
+Build process
 ![](./static/images/4-svelte-build.png)
-- Traditional architecture
+
+Traditional architecture
 ![](./static/images/4-svelte-traditional.png)
-- Component base Architecture (cba)
+
+Component base Architecture (cba)
 ![](./static/images/4-svelte-cba.png)
-- Components
+
+Components
 ![](./static/images/4-svelte-components.png)
-- Svelte
+
+Svelte
 Performance, Less client-side JS and Easier syntax
 ![](./static/images/4-svelte-components-2.png)
 
@@ -147,33 +171,32 @@ You can preview the production build with `npm run preview`.
 
 Something to know
 
-```bash
-FYI
-What does these commands lines do? 
-
-npm install: reads dependencies from package.json and installs the packages listed there.
-
-npm install -D svelte@next: will replace the Svelte version already installed with the latest pre-release version (which we need for modern CSS support).
-
-npm install -D @sveltejs/adapter-static: will install the static adapter for SvelteKit, which we will use to deploy our website to GitHub Pages
-```
+> [!TIP]
+> What does these commands lines do? 
+> npm install: reads dependencies from package.json and installs the packages listed there.
+> npm install -D svelte@next: will replace the Svelte version already installed with the latest pre-release version (which we need for modern CSS support).
+> npm install -D @sveltejs/adapter-static: will install the static adapter for SvelteKit, which we will use to deploy our website to GitHub Pages
 
 
-> **Warning**: To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+> [!WARNING]
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
 
 ### 4.2: Porting your previous website to Svelte
-- First, copy your images/ folder as well as style.css and global.js to static/
-- Adjust src/app.html to read upper files
-- Porting your pages to routes:
+First, copy your images/ folder as well as style.css and global.js to static/.
 
-projects/index.html → routes/projects/+page.svelte
+Adjust src/app.html to read upper files.
 
-cv/index.html → routes/cv/+page.svelte
+Porting your pages to routes:
 
-contact/index.html → routes/contact/+page.svelte
+- projects/index.html → routes/projects/+page.svelte
 
-- Adding titles with `<svelte:head>` element
-- Adjusting navigation bar URLs, delete the trailing slash at the end of your relative URLs in global.js.
+- cv/index.html → routes/cv/+page.svelte
+
+- contact/index.html → routes/contact/+page.svelte
+
+Adding titles with `<svelte:head>` element.
+
+Adjusting navigation bar URLs, delete the trailing slash at the end of your relative URLs in `global.js`.
 
 ### 4.3: Publishing our new website to GitHub Pages
 Add and edit these files in your project then push to deploy
@@ -182,26 +205,36 @@ Add and edit these files in your project then push to deploy
 
 `svelte.config.js` (https://vis-society.github.io/labs/4/download/svelte.config.js).
 
-**Warning**: Add if neccesary a .env file with BASE_PATH=/svelte-portfolio 
-to avoid, strange things
-
 ### 4.4: Templating projects from a data file
 
-- Move your data projects to /src/lib/projects.json
+Move your data projects to /src/lib/projects.json
 
-Useful code to extract data from dev tools. Put it in the console log
-```
+> [!NOTE]
+> A useful code to extract data from dev tools. Put it in the console log.
+
+```bash
 $$(".projects > article").map (a => ({
 	title: $('h2', a).textContent,
 	image: $("img", a).getAttribute("src"),
 	description: $("p", a).textContent,
 }));
 ```
-- Load your data in src/routes/projects/+page.svelte
-- Be able to indicate the total count of projects
+Template your project data with 
+```js
+{#each projects as p}
+<article>
+...
+</article>
+{/each}
+```
 
-### 4.5: Displaying the first 3 projects on the home page
-- Create and use **Project** component.
+Load your data in src/routes/projects/+page.svelte.
+
+Be able to indicate the total count of projects.
+
+
+### 4.5: Displaying the first three projects on the home page
+Create and use a **Project** component.
 
 This line is useful only to declare a prop variable
 In Project.svelte
@@ -210,9 +243,9 @@ export let data = {};
 ```
 Project.svelte goes into components folder
 
-- Showing the latest projects on the home page
+#### Showing the latest projects on the home page
 
-Use the `<Project>` component to  show the lastest 3 with *slice*
+Use the `<Project>` component to  show the lastest 3 with *slice*.
 
 svelte-portfolio/src/+page.svelte
 ```
@@ -226,7 +259,7 @@ svelte-portfolio/src/+page.svelte
 </h1>
 ```
 
-- Customizing heading levels
+#### Customizing heading levels
 
 Set the hierarchy of the component using props and move styles from svelte-portfolio/static/style.css to the component itself in `<style>` element.
 
@@ -246,8 +279,11 @@ Create a Layout for nav.
 - JS is not reactive. You have to do it with event listeners
 - For reactivity in svelte do:
 
-`$` recalculates when dependencies change and
-`bind:value={a}` updates the UI when the input changes
+>[!IMPORTANT]
+>`$` recalculates when dependencies change.
+
+>[!IMPORTANT]
+>`bind:value={a}` updates the UI when the input changes
 ```
 <script>
 	let a = 1, b = 2, c;
@@ -262,28 +298,27 @@ Create a Layout for nav.
 ![](./static/images/reactivity.png)
 
 ### 5.1 Port the theme switcher to Svelte (Dark/Light theme)
-*Concepts*
+#### Concepts
 
-- “Bind” in this context means that the value of the variable will be automatically updated when the value of the `<select>` changes, and vice versa.
+“Bind” in this context means that the value of the variable will be automatically updated when the value of the *html element* changes, and vice versa.
 
-- Html tag is not part of the svelte technology. So that's is for *document* is undefined and  `console.log(document)` throws an error `500 internal error`. 
+Html element is not part of the svelte technology. So that's why *document* is undefined and  `console.log(document)` throws an error `500 internal error`. 
 
-Explanation: 
+> [!TIP]
+> Explanation: Our Svelte code is first ran in Node.js to generate the static parts of our HTML, and the more dynamic parts make it to the browser. However, Node.js has no document object, let alone a document.documentElement object.
 
-`Our Svelte code is first ran in Node.js to generate the static parts of our HTML, and the more dynamic parts make it to the browser. However, Node.js has no document object, let alone a document.documentElement object`
+When accessing properties of objects of questionable existence, we can use the optional chaining operator **?**. instead of the dot operator to avoid errors
 
-- When accessing properties of objects of questionable existence, we can use the optional chaining operator **?**. instead of the dot operator to avoid errors
-
-set colorScheme variable to the "color-scheme" property in the document 
-```
+> Set `colorScheme` variable to the "color-scheme" property in the document 
+```js
 let root = globalThis?.document?.documentElement;
 $: root?.style.setProperty("color-scheme", colorScheme);
 
 ```
 
-- Use $ for reactivity statement
+Use $ for reactivity statement.
 
-- Save the color-scheme to localStorage and get it again to keep the theme switcher in other pages 
+> Save the color-scheme to localStorage and get it again to keep the theme switcher in other pages 
 ```
 let localStorage = globalThis.localStorage ?? {};
 
@@ -291,13 +326,13 @@ $: localStorage.colorScheme = colorScheme;
 
 ```
 
-- Preventing FOUC (Flash of Unstyled content) add the `script` code to the app.html
-A strange behavior when theme changes after the page has loaded
+For preventing FOUC (Flash of Unstyled content), add the `script` code to the app.html
+A strange behavior when theme changes after the page has loaded.
 
 This code set the theme before the page has loaded. 
 
 app.html 
-```
+```js
 <script type="module">
 	let root = document.documentElement;
 	let colorScheme = localStorage.colorScheme ?? "light dark";
@@ -308,20 +343,19 @@ app.html
 ### 5.2 Loading data from an API
 Images of the results
 ![](./static/images/loading-api.png)
-- Use an API to extract github stats data. An example from `https://api.github.com/users/your-username`
-- *fetch* is an example of an asynchronous function. This means that it does not return the data directly, but rather a Promise that will eventually resolve to the data. In fact, fetch() returns a Promise that resolves to a Response object, which is a representation of the response to the request. To get meaningful data from a Response object, we need to call one of its methods, such as json(), which returns a Promise that resolves to the JSON representation of the response body.
+Use an API to extract github stats data. An example from `https://api.github.com/users/your-username`.
+
+*fetch* is an example of an asynchronous function. This means that it does not return the data directly, but rather a Promise that will eventually resolve to the data. In fact, fetch() returns a Promise that resolves to a Response object, which is a representation of the response to the request. To get meaningful data from a Response object, we need to call one of its methods, such as json(), which returns a Promise that resolves to the JSON representation of the response body.
 
 Extract a promise
-```
+```js
   let promise = fetch("https://api.github.com/users/leaverou").then(
     (response) => response.json(),
   );
 ```
 
-- Use the `#await`block for managing promises
-
-syntax 
-```
+Use the `#await`block for managing promises. 
+```js
 {#await promise}
 	Loading...
 {:then data}
@@ -330,8 +364,9 @@ syntax
 	Something went wrong: {error.message}
 {/await}
 ```
-- Use `<dl>`, `<dt>` and `<dd>` tags and styles to custom display information like the picture.
-- Update the year of your projects.
+Use `<dl>`, `<dt>` and `<dd>` tags and styles to custom display information like the picture.
+
+Update the year of your projects.
 
 ## Lab 6: Visualizing categorical data with D3
 ### Slides
@@ -346,9 +381,16 @@ No slides but useful information for this lab
 - Add the year of the article
 - Style the article
 
-#### 6.1.0: Creating a pie chart with D3
-- Create a Pie.svelte component
-- Create a circle svg
+### 6.1: Creating a pie chart with D3
+
+#### 6.1.1: Create a <Pie> component and use it in your project page
+Create a Pie.svelte component in `src/lib`.
+
+```js
+import Pie from '$lib/Pie.svelte'
+```
+
+Create a circle svg.
 
 #### 6.1.1 Drawing our circle path with D3
 - Use of the powerful `<path>` element to draw a circle
@@ -590,18 +632,20 @@ Position the tooltip with the mouse based position using events. So in `circle` 
 
 > Usually avoid setting <u>default</u> CSS properties. So do settings directly like *style* in `dl` element.  
 
-#### 7.3.4 Bulletproof positioning (optional-Not completed)
+#### 7.3.5 Bulletproof positioning (optional-Not completed)
 The tooltip built only works if the mouse is near the center of the viewport. Near the edges the tooltip fails and it shows cutten. Here is an image of a cutten tooltip.
 
 ![](./static/images/middle/7-cutten%20tooltip.png)
 
 The solution is really complicated, it is better to save our time using a tool called **@floating-ui/dom**. So install it!. This works only with DOM elements.
 
-Move event listeners code to `dotInteraction (index, event)` async function
+Move event listeners code to `dotInteraction (index, event)` async function.
 
-`bind:this` is a way to assign an element to a variable
+`bind:this` is a way to assign an element to a variable.
 
 Fix accesibility issues, like tabindex, role etc
+Fix these issues
+![](/static/images/middle/7-cutten-fix-issues.png)
 
 ### 7.4: Communicating lines edited via the size of the dots (optional)
 Add the *number of lines* as a third variable and map to the radius size. 
@@ -690,3 +734,40 @@ Results
 
 ### Warning
 > If you change public to private, you will miss your deploy. If you need to recover again change to public again and go to settings and choose Github Actions in <b>Build and deployment</b> section.
+
+## Lab 8: Lab 8: Geospatial Visualizations
+
+The project of this lab was moved to [svelte-bikewatch](https://github.com/ccalobeto/svelte-bikewatch).
+
+## Lab 9: Animation & Scrollytelling
+### Slides
+#### Animation Components
+
+- Interpolation: Intermediate states from A to B.
+
+- Progression: What advances the timeline.
+
+##### Interpolation
+![](/static/images/final/9-slides-interpolation.gif)
+
+##### Progression
+![](/static/images/final/9-slides-progression.gif)
+
+###### Manual progression
+![](/static/images/final/9-slides-manual-progression.gif)
+
+#### Relevant Technologies
+
+![](/static/images/final/9-slides-relevant-technologies.png)
+
+> [!NOTE]
+> The lab consists in converting **meta page** to an interactive narrative visualization that shows the progress of our codebase over time.
+
+### 9.0 Preparation
+
+#### 9.0.1 Making commits clickable
+Currently, the only way to select the commits is by brusing the pie chart.
+But we need another way to make it easier.
+
+Refactor `brushedSelection` and `isCommitedSelected`.
+
