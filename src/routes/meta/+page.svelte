@@ -3,6 +3,7 @@
   import { onMount } from "svelte";
   import Tooltip from "../../lib/components/Tooltip.svelte";
   import Pie from "../../lib/components/Pie.svelte";
+  import { computePosition, autoPlacement, offset } from "@floating-ui/dom";
 
   let data = [];
   let commits = [];
@@ -32,6 +33,8 @@
   let svg;
   let selectedLines;
   let languageBreakdown;
+  let commitTooltip;
+  let tooltipPosition = { x: 0, y: 0 };
 
   onMount(async () => {
     data = await d3.csv("loc.csv", (row) => ({
@@ -138,6 +141,20 @@
     return selectedCommits.includes(commit);
   }
 
+  async function dotInteraction(index, evt) {
+    let hoveredDot = evt.target;
+    if (evt.type === "mouseenter" || evt.type === "focus") {
+      hoveredIndex = index;
+      tooltipPosition = await computePosition(hoveredDot, commitTooltip, {
+        strategy: "fixed",
+        middleware: [offset(5), autoPlacement()],
+      });
+      cursor = { x: evt.x, y: evt.y };
+    } else if (evt.type === "mouseleave" || evt.type === "blur") {
+      hoveredIndex = -1;
+    }
+  }
+
   let selectedCommits = [];
   $: hasSelection = selectedCommits.length > 0;
 
@@ -195,13 +212,14 @@
         stroke="gray"
         stroke-width="2"
         opacity="0.5"
-        on:mouseenter={(event) => {
-          hoveredIndex = index;
-          cursor = { x: event.x, y: event.y };
-        }}
-        on:mouseleave={(event) => (hoveredIndex = -1)}
+        on:mouseenter={(event) => dotInteraction(index, event)}
+        on:mouseleave={(event) => dotInteraction(index, event)}
         tabindex="0"
+        aria-describedby="commit-tooltip"
         role="button"
+        aria-haspopup="true"
+        on:focus={(event) => dotInteraction(index, event)}
+        on:blur={(event) => dotInteraction(index, event)}
       />
     {/each}
   </g>
@@ -211,8 +229,10 @@
     bind:this={yAxisGridlines}
   />
 </svg>
-<Tooltip commit={hoveredCommit} index={hoveredIndex} {cursor} />
+<Tooltip commit={hoveredCommit} index={hoveredIndex} cursor={tooltipPosition} />
 <p>{hasSelection ? selectedCommits.length : "No"} commits selected</p>
+{console.log("cursor: ", cursor)}
+{console.log("tooltipPosition: ", tooltipPosition)}
 
 <dl class="language">
   {#each languageBreakdown as item}
@@ -227,6 +247,7 @@
     value: d.lines,
   }))}
 />
+<dl class="info" bind:this={commitTooltip}></dl>
 
 <style>
   svg {
