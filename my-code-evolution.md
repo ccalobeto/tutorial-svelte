@@ -75,4 +75,14 @@ npm run gdoc
 
 ## Part 11
 - The entire video is related to dynamic render content with google docs.
+> [!WARNING]
+> Some pieces of text are not showed with middle lines.
+
+## Part 12
+- Insert *base* path in some `href`.
+- Generate multiple image sizes
+- Output: little images in a paragraph.
+![](/static/documentation/little-images.png)
+
+
 
