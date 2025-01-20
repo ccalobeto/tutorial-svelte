@@ -3,6 +3,9 @@
 ## Diagram
 ![](/static/assets/diagram/pudding-template-drawio.svg)
 
+## Notes
+Some parts don't have code, see the log.
+
 ## Part 1
 ### Data generation
 Go to [stories](https://docs.google.com/spreadsheets/d/1hIIwnbmcIpRlygNZNY6SAnKFzAI79QROcrCglQhoZyQ/edit?gid=0#gid=0) and [authors](https://docs.google.com/spreadsheets/d/1jFlS8Ghkat-h2W27Q2YfoXRV5RuNFY_ML6hiirMa6HM/edit?gid=0#gid=0), then adjust `google.config.js` following the [rules](https://github.com/the-pudding/svelte-starter#google-docs-and-sheets)
@@ -81,8 +84,17 @@ npm run gdoc
 ## Part 12
 - Insert *base* path in some `href`.
 - Generate multiple image sizes
+- Given a paragraph in a doc file with keys (popular and personal) place the some images.
+![](/static/documentation/12-paragraph.png)
 - Output: little images in a paragraph.
 ![](/static/documentation/little-images.png)
+
+## Partt 13
+- Build Home.Search.svelte component for to looks for stories
+- Build a Home.Stories.svelte component to display a quick summary.
+Use of `setContext` and `getContext`
+![](/static/documentation/13-stories-card.png)
+- If you are searching temporary the cards are not visible, only a quinck resume.
 
 
 
