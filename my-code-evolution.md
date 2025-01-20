@@ -74,4 +74,5 @@ npm run gdoc
 - It is not practical that your team type a href in a doc file, so make it dynamic using `[popular]` in docs that refers to interesting stories of *The Pudding*, see since 50:39.
 
 ## Part 11
-- Do more dynamic render content with google docs. The entire video is related to this.
+- The entire video is related to dynamic render content with google docs.
+
