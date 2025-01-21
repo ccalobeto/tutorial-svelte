@@ -90,11 +90,26 @@ npm run gdoc
 ![](/static/documentation/little-images.png)
 
 ## Partt 13
-- Build Home.Search.svelte component for to looks for stories
+- Build Home.Search.svelte component for looking stories
 - Build a Home.Stories.svelte component to display a quick summary.
 Use of `setContext` and `getContext`
 ![](/static/documentation/13-stories-card.png)
-- If you are searching temporary the cards are not visible, only a quinck resume.
+- If you are searching stories the images collapses and display only a resume.
+
+## Part 14
+
+- Re-build the footer.
+- A **Pitch a Story** page designed by Figma needs to move its content to google docs called **website:pitch copy** and format the text for being extracted by code.
+![Pitch a Story](/static/documentation/14-figma-design.png)
+![doc](/static/documentation/14-doc.png)
+![Pitch page](/static/documentation/14-pitch-deploy.gif)
+- Create a google doc called **website:data viz resources copy** for resources and use `resources.svelte` page and `Resources.svelte` component to render its content. Create a sheet called **website:resources** to fill categories. Remember to include the doc and sheet google files in `google.config.cjs`.
+![resources doc](/static/documentation/14-website-resources.png)
+![resources sheet](/static/documentation/14-website-resources-sheet.png)
+
+> [!NOTE]
+> Don't forget to share googel docs and sheets.
+
 
 
 
