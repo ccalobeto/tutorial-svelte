@@ -121,4 +121,16 @@ to `google.config.js`
 ![](/static/documentation/15-about-3.png)
 - Adjust **website:picth copy google-doc** file
 
+## Part 16
+- Add bio data to `Author.svelte` content. Reduce images sizes and compress with **ImageOptimize** tool. Create a `staff.js` and complete `About.svelte` to show all for authors images and its link profiles.
+![](/static/documentation/16-about-authors.gif)
 
+- Modify `Home.Stories.svelte` searching stories functionality, so it shows the first 10 blurry images and collapse the others at the bottom.
+![](/static/documentation/16-collapse-images.gif)
+
+
+
+
+
+
+ 
