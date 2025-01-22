@@ -97,7 +97,6 @@ Use of `setContext` and `getContext`
 - If you are searching stories the images collapses and display only a resume.
 
 ## Part 14
-
 - Re-build the footer.
 - A **Pitch a Story** page designed by Figma needs to move its content to google docs called **website:pitch copy** and format the text for being extracted by code.
 ![Pitch a Story](/static/documentation/14-figma-design.png)
@@ -110,6 +109,16 @@ Use of `setContext` and `getContext`
 > [!NOTE]
 > Don't forget to share googel docs and sheets.
 
-
+## Part 15
+- Working with placeholder blurry images
+- Create **website:resources* and `Resources.svelte` component for showing FAQs
+![resources](/static/documentation/15-resources-doc.png)
+![faq](/static/documentation/15-faq.png)
+- Create **about** page using a template **website:about copy2**  and a sheet **website:awards**. Create an `about.svelte` page. And Don't forget to add the changes
+to `google.config.js`
+![about](/static/documentation/15-about.png)
+![about](/static/documentation/15-about-2.png)
+![](/static/documentation/15-about-3.png)
+- Adjust **website:picth copy google-doc** file
 
 
