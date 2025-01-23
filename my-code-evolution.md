@@ -144,8 +144,17 @@ to `google.config.js`
 ![](/static/documentation/17-bolded-and-increased.gif)
 - Create *tokenize* function in `Home.Search.svelte` that returns a list of tokens. Create a *getScore* function to give a rank.
 
-- Given a *search* word, the **score** function find all the stories with different authors and returns a number per story. You can enter composite words.
+- Given a *search* word, the app will find all the related stories (even with different authors) and returns a score per story. You can enter composite words. It works with the name of each column which are called tokens. It also scored a word inside of a string with a middle of points of weights.
 ![](/static/documentation/17-score.gif)
+
+## Part 18
+- Reduce the opacity (a lighter color)
+![](/static/documentation/18-reduce-opacity.gif)
+
+- Use of `del` tag and css to show delayed words and with css a fade in text(59:30).
+![](/static/documentation/18-delay-words.gif)
+![](/static/documentation/18-fade-in-text.gif)
+
 
 
 
