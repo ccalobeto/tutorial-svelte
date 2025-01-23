@@ -155,11 +155,19 @@ to `google.config.js`
 ![](/static/documentation/18-delay-words.gif)
 ![](/static/documentation/18-fade-in-text.gif)
 
+## Part 19
+- Text animation, background size and position 
+![](./static/documentation/19-text-animation.gif)
+![](/static/documentation/19-background-and-positions.gif)
+
+- Improve the interaction image
+![](/static/documentation/19-more-dynamic.gif)
 
 
 
 
 
+ 
 
 
  
