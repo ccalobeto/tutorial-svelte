@@ -43,22 +43,30 @@ The mission is to use resizes to lower bandwidth
 > You will need to install some additional packages to run the scripts. 
 
 ## Part 3
-- Refactor, create a separate script for filtering stories)
-- Render hed and slug. Don't forget to add keys before rendering the page in `Home.svelte` component.
-- Move loading data from `+page.server.js` to an **api**.
+- Refactor, create a separate script for [filtering stories](https://github.com/ccalobeto/svelte-pudding/commit/8702cf3f27ac12567d382cf22aefe58379d3dcf8).
+- [Render hed and slug](https://github.com/ccalobeto/svelte-pudding/commit/564f4e83623ab9376044fcdbfca06b79ca523302). Don't forget to add keys before rendering the page in `Home.svelte` component.
+- Move loading data from `+page.server.js` to an [**api**](https://github.com/ccalobeto/svelte-pudding/commit/e7b124291a2feced5b9db3193fc8128d0e22f9bd).
 
 ## Part 4
-### Add thumbernails
-### Given a list of images filter data
+### Add [thumbernails](https://github.com/ccalobeto/svelte-pudding/commit/faf2208a1cfe0cf2862872eca97a32c4120af46d)
+### Given a list of images [filter data](https://github.com/ccalobeto/svelte-pudding/commit/14641ef338572249dcf0d0154c316572d37a2da3)
 ### Author's page creation
-- Change the way of loading and cleaning a csv file
-- Create an author's page component
+- Change the way of [loading and cleaning](https://github.com/ccalobeto/svelte-pudding/commit/16235ec72db0877479096a876ac535588d9ea08b) a csv file
+- Create an [author's page](https://github.com/ccalobeto/svelte-pudding/commit/14f4bdb28e133a0932785796371583c04a544770) component
 - Create a *page.js* that use an author that fetches a request to an *api* that filter his stories.
-- Be careful if you use subdirectories. Add `{base}` to your *url* to `fetch`
+- Be careful if you use [subdirectories](https://github.com/ccalobeto/svelte-pudding/commit/9fcb3ea160435fdc3d03e86468458567ca98ad4f). Add `{base}` to your *url* to `fetch`
 
+## Part 5
+- Import `js` file instead of `csv` file.
+- Change [fonts]https://github.com/ccalobeto/svelte-pudding/commit/2e59187254e5e739e53ab229c89cbc2695cc4539) 
+
+## Part 6
+
+## Part 7
+- [Image](https://github.com/ccalobeto/svelte-pudding/commit/80b94272a96f81db01e8b2b03681d5e8d11be905) improve 
 ## Part 8
-### Another way to fetch data from csv file
-### Some css styling: padding
+- Another way to [fetch](https://github.com/ccalobeto/svelte-pudding/commit/8e48045ba39de9c0c5788fdf9f7495634b1d1d88) data from csv file
+- Some css styling: padding
 
 ## Part 9
 ### Extract data from doc files 
@@ -127,6 +135,13 @@ to `google.config.js`
 
 - Modify `Home.Stories.svelte` searching stories functionality, so it shows the first 10 blurry images and collapse the others at the bottom.
 ![](/static/documentation/16-collapse-images.gif)
+
+## Part 17
+- Modify the `links.js` and export **constants** to reach all the content.
+- Modify `Home.Stories.svelte` to increase the font sizes and show bolded fonts.
+![](/static/documentation/17-bolded-and-increased.gif)
+- Create *tokenize* function in `Home.Search.svelte` that returns a list of strings.
+
 
 
 
