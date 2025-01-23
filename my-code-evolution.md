@@ -58,7 +58,7 @@ The mission is to use resizes to lower bandwidth
 
 ## Part 5
 - Import `js` file instead of `csv` file.
-- Change [fonts]https://github.com/ccalobeto/svelte-pudding/commit/2e59187254e5e739e53ab229c89cbc2695cc4539) 
+- Change [fonts](https://github.com/ccalobeto/svelte-pudding/commit/2e59187254e5e739e53ab229c89cbc2695cc4539) 
 
 ## Part 6
 
@@ -72,20 +72,22 @@ The mission is to use resizes to lower bandwidth
 ### Extract data from doc files 
 Use data in doc files to be displayed in components. A history could be made from a writer's story and you extract those pieces of text to be rendered into components. Use **tags**.
 - These doc files with markup are hosted in Drive. Be sure to share the folder.
-- Add the id doc in google.config.js and set the output.
+- Add the id doc in [google.config.js](https://github.com/ccalobeto/svelte-pudding/commit/2e847602605124c4f86f45c71f791fee390d257f) and set the output.
 ![](/static/documentation/google-doc-url.png)
 - Generate the `json` file with this command
 ```zh
 npm run gdoc
 ```
+- [Copy injection](https://github.com/ccalobeto/svelte-pudding/commit/92f300a10173e723d115c9097956dd827cf442bd)
 
 ## Part 10
-- The dev shows how they use **Figma** to design the digital content.
+- The developer shows how they use **Figma** to design the digital content.
 - Add an intro to *The pudding* through `website: home copy`
-- It is not practical that your team type a href in a doc file, so make it dynamic using `[popular]` in docs that refers to interesting stories of *The Pudding*, see since 50:39.
+- It is not practical that your team type a href in a doc file, so make it dynamic using `[popular]` in docs that refers to interesting stories of *The Pudding*, see since 50:39.[](https://github.com/ccalobeto/svelte-pudding/commit/9f4d9a185c34ab609094909b3f86b9ef584de7a2)
 
 ## Part 11
 - The entire video is related to dynamic render content with google docs.
+
 > [!WARNING]
 > Some pieces of text are not showed with middle lines.
 
@@ -140,7 +142,10 @@ to `google.config.js`
 - Modify the `links.js` and export **constants** to reach all the content.
 - Modify `Home.Stories.svelte` to increase the font sizes and show bolded fonts.
 ![](/static/documentation/17-bolded-and-increased.gif)
-- Create *tokenize* function in `Home.Search.svelte` that returns a list of strings.
+- Create *tokenize* function in `Home.Search.svelte` that returns a list of tokens. Create a *getScore* function to give a rank.
+
+- Given a *search* word, the **score** function find all the stories with different authors and returns a number per story. You can enter composite words.
+![](/static/documentation/17-score.gif)
 
 
 
