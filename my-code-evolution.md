@@ -163,6 +163,11 @@ to `google.config.js`
 - Improve the interaction image
 ![](/static/documentation/19-more-dynamic.gif)
 
+## Part 20
+- Create `Header.Social.svelte` and `Header.SlideOut.svelte` components
+- Header positioning and accesability focus
+![](/static/documentation/20-header-positioning.gif)
+
 
 
 
