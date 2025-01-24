@@ -168,6 +168,21 @@ to `google.config.js`
 - Header positioning and accesability focus
 ![](/static/documentation/20-header-positioning.gif)
 
+![](/static/documentation/20-accessability.gif)
+
+## Part 21
+- In firefox turn on the keyboard  navigation
+![](/static/documentation/21-firefox-navigation.png)
+
+- Header layout: padding between social links, padding between groups
+![](/static/documentation/21-header-layout.gif)
+
+- Create `Home.Promo.svelte` component to display **promos**, use the `promo` field as a source present in `website:home copy` file. It is display with yellow background.
+![](/static/documentation/21-home-copy.png)
+![](/static/documentation/21-promo-display.png)
+
+- Use of **Contrast checkers** basically [wcag-contrast]() library to calculate the contrast ratio of your page
+
 
 
 
