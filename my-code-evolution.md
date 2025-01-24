@@ -193,12 +193,20 @@ Now see the stories colors link and its contrast background.
 - On *search* jump to top, two actions are coded focus and jump (23:37)
 ![](/static/documentation/22-focus.gif)
 
-- Make *pitch* links, `external` and it means inject "external" markup inside `author's.csv` output file. Be careful because there are '`' characters in some cells in author's google sheet. (38:00).
+- Make `pitch` route links **external** (if you click open another window), so inject "external" markup inside `author's.csv` output file. Be careful because there are '`' characters in some cells in author's google sheet. (38:00).
 ![](/static/documentation/22-not-external.png)
 ![](/static/documentation/22-external-injection.png)
 
+## Page 23
+- Use the *sveltekit* template for **error** page
+![](/static/documentation/23-error-page.png)
 
+- Modify color border - above the title (08:52)
+![](/static/documentation/23-title.png)
 
+- Some cool things in the site - padding title, size font, color underlines, color background font, signature, padding signature, size and padding stories, transform arrow to a hand (11:48)
+![](/static/documentation/23-styling.gif)
+![](/static/documentation/23-styling-2.gif)
 
 
 
