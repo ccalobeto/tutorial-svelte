@@ -177,11 +177,32 @@ to `google.config.js`
 - Header layout: padding between social links, padding between groups
 ![](/static/documentation/21-header-layout.gif)
 
-- Create `Home.Promo.svelte` component to display **promos**, use the `promo` field as a source present in `website:home copy` file. It is display with yellow background.
+- Create `Home.Promo.svelte` component to display **promos** text, use the `promo` field as a source present in `website:home copy` file. It is display with yellow background.
 ![](/static/documentation/21-home-copy.png)
 ![](/static/documentation/21-promo-display.png)
 
-- Use of **Contrast checkers** basically [wcag-contrast]() library to calculate the contrast ratio of your page
+- Use of **Contrast checkers** basically [wcag-contrast]() library for more dynamic color. Follow #Part 22
+
+## Part 22
+- Convert an array of colors to hsl format
+![](/static/documentation/22-array-color.png)
+![](/static/documentation/22-array-to-hsl.png)
+Now see the stories colors link and its contrast background. 
+![](/static/documentation/22-colors.gif)
+
+- On *search* jump to top, two actions are coded focus and jump (23:37)
+![](/static/documentation/22-focus.gif)
+
+- Make *pitch* links, `external` and it means inject "external" markup inside `author's.csv` output file. Be careful because there are '`' characters in some cells in author's google sheet. (38:00).
+![](/static/documentation/22-not-external.png)
+![](/static/documentation/22-external-injection.png)
+
+
+
+
+
+
+
 
 
 
