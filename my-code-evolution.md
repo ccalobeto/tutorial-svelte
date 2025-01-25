@@ -197,26 +197,28 @@ Now see the stories colors link and its contrast background.
 ![](/static/documentation/22-not-external.png)
 ![](/static/documentation/22-external-injection.png)
 
-## Page 23
+## Part 23
 - Use the *sveltekit* template for **error** page
 ![](/static/documentation/23-error-page.png)
 
-- Modify color border - above the title (08:52)
+- Modify color border: above the title (08:52)
 ![](/static/documentation/23-title.png)
 
-- Some cool things in the site - padding title, size font, color underlines, color background font, signature, padding signature, size and padding stories, transform arrow to a hand (11:48)
+- Some cool things in the site: padding title, size font, color underlines, color background font, signature, padding signature, size and padding stories, transform arrow to a hand (11:48)
 ![](/static/documentation/23-styling.gif)
 ![](/static/documentation/23-styling-2.gif)
 
+## Part 24
+- About section: compare skeletons between `Header.SlideOut.svelte` and `Footer.svelte`
 
+- Refactor: moving ctas, follow, add cta and add links (6:31)
+![](/static/documentation/24-refactor.gif)
 
-
-
-
-
-
-
+- Refactor footer layout: side by side  (23:00)
+![](/static/documentation/24-refactor-footer.gif)
  
+- Refactor Home page (24:19)
+![](/static/documentation/24-refactor-home.gif)
 
-
- 
+- Reuse component: refactor author's page: styling, an excelent function to perform which social media show if the author has or hasn't  (43:35)
+![](/static/documentation/24-authors-page.gif)
