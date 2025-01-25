@@ -1,216 +1,265 @@
-# Svelte Starter
+# Making a complete website in pudding
+Here is the way how you start --> [Svelte Starter](./Svelte-starter.md)
 
-**NOTE**: This uses Svelte 5 and is under active migration (not all features will work). For the less adventurous, use the [previous version](https://github.com/the-pudding/svelte-starter) (with Svelte 4).
+## Diagram
+![](/static/assets/diagram/pudding-template-drawio.svg)
 
-This [starter template](https://github.com/the-pudding/svelte-starter) aims to quickly scaffold a [SvelteKit](https://kit.svelte.dev/) project, designed around data-driven, visual stories at [The Pudding](https://pudding.cool).
+## Notes for pudding developer
+Some parts don't have code, see the log.
 
-### Notes
-* _Do not use or reproduce The Pudding logos or fonts without written permission._
-* _Prettier Formatting: Disable any text editor Prettier extensions to take advantage of the built-in rules._
+## Part 1
+### Data generation
+Go to [stories](https://docs.google.com/spreadsheets/d/1hIIwnbmcIpRlygNZNY6SAnKFzAI79QROcrCglQhoZyQ/edit?gid=0#gid=0) and [authors](https://docs.google.com/spreadsheets/d/1jFlS8Ghkat-h2W27Q2YfoXRV5RuNFY_ML6hiirMa6HM/edit?gid=0#gid=0), then adjust `google.config.js` following the [rules](https://github.com/the-pudding/svelte-starter#google-docs-and-sheets)
 
-### Features
-
-- [Lucide Icons](https://lucide.dev/) for simple/easy svg icons
-- [ArchieML](http://archieml.org/) for micro-CMS powered by Google Docs and Sheets
-- [Style Dictionary](https://amzn.github.io/style-dictionary/) for CSS/JS style parity
-- CSV, JSON, and SVG imports
-- SSR static-hosted builds by default
-
-## Quickstart
-#### From Scratch
-* Click the green `Use this template` button above.
-* Alternatively: `npx degit the-pudding/svelte-starter my-project`
-
-#### Pre-existing Project
-* clone the repo
-
-#### Installation
-* In your local repo run `pnpm install` or `npm install`
-
-## Development
-
-```bash
-npm run dev
+```zsh
+npm run gdoc
 ```
 
-Change the script in `package.json` to `"dev": "svelte-kit dev --host"` to test on your local network on a different device.
+### Data Usage
+- Create a `$utils/parseStories.js` function to clean data.
 
-## Deploy
-```bash
-npm run build
+- Create a **load** function in `+page.server.js` to extract data from *csv* and clean it. 
+
+- In `+page.svelte` get data with props and pass it to **Home** component.
+
+- In `Home.svelte` component get data with props and render it.
+
+### Links
+- Create author route and dynamic page `[author].svelte`
+
+## Part 2
+### Using subdirectories in Github
+- To test local build add environment variable. Check if you need to add the variable in github for *production* build.
+```zh
+export NODE_ENV=development
 ```
 
-This generates a directory called `build` with the statically rendered app.
+- Add subdirectory, so modify your `path.base` in `svelte.config.js` and modify the `a` tag with `href="{base}/about"`
 
-A shortcut for github pages:
-```bash
-make github
+### Image Transformation
+The mission is to use resizes to lower bandwidth
+
+- Copy the `tasks/fetch-og-images.js` script to fetch images from [the pudding](https://github.com/the-pudding/website).
+
+- Copy the `tasks/thumbnail-og.js` script to resize images from [the pudding](https://github.com/the-pudding/website).
+
+> [!IMPORTANT]
+> You will need to install some additional packages to run the scripts. 
+
+## Part 3
+- Refactor, create a separate script for [filtering stories](https://github.com/ccalobeto/svelte-pudding/commit/8702cf3f27ac12567d382cf22aefe58379d3dcf8).
+
+- [Render hed and slug](https://github.com/ccalobeto/svelte-pudding/commit/564f4e83623ab9376044fcdbfca06b79ca523302). Don't forget to add keys before rendering the page in `Home.svelte` component.
+
+- Move loading data from `+page.server.js` to an [**api**](https://github.com/ccalobeto/svelte-pudding/commit/e7b124291a2feced5b9db3193fc8128d0e22f9bd).
+
+## Part 4
+- Add [thumbernails](https://github.com/ccalobeto/svelte-pudding/commit/faf2208a1cfe0cf2862872eca97a32c4120af46d)
+
+- Given a list of images [filter data](https://github.com/ccalobeto/svelte-pudding/commit/14641ef338572249dcf0d0154c316572d37a2da3)
+
+- Change the way of [loading and cleaning](https://github.com/ccalobeto/svelte-pudding/commit/16235ec72db0877479096a876ac535588d9ea08b) a csv file
+
+- Create an [author's page](https://github.com/ccalobeto/svelte-pudding/commit/14f4bdb28e133a0932785796371583c04a544770) component
+[link](http://localhost:5173/author/amber-thomas/). It is not working in production.
+
+- Create a *page.js* that use an author that fetches a request to an *api* that filter his stories.
+
+- Be careful if you use [subdirectories](https://github.com/ccalobeto/svelte-pudding/commit/9fcb3ea160435fdc3d03e86468458567ca98ad4f). Add `{base}` to your *url* to `fetch`
+
+## Part 5
+- Move data importing and preparation from `$data/stories.csv` and `$utils/cleanStories.js` to [$data/stories.js](https://github.com/ccalobeto/svelte-pudding/commit/13644147f981606f959e6fb813d356e336bd8c1b).
+
+- Endpoint change route `api/stories` by`api/stories.json` (6:30) 
+![](/static/documentation/5-endpoint.png)
+
+- Restructuring skeleton (9:09)
+
+- Set the fonts locally and [use](https://github.com/ccalobeto/svelte-pudding/commit/2e59187254e5e739e53ab229c89cbc2695cc4539) (16:41) 
+
+- Setting base path (19:36)
+Problems in build time
+
+
+## Part 6
+
+## Part 7
+- [Image](https://github.com/ccalobeto/svelte-pudding/commit/80b94272a96f81db01e8b2b03681d5e8d11be905) improve 
+
+## Part 8
+- Another way to [fetch](https://github.com/ccalobeto/svelte-pudding/commit/8e48045ba39de9c0c5788fdf9f7495634b1d1d88) data from csv file
+- Some css styling: padding
+
+## Part 9
+### Extract data from doc files 
+Use data in doc files to be displayed in components. A history could be made from a writer's story and you extract those pieces of text to be rendered into components. Use **tags**.
+
+- These doc files with markup are hosted in Drive. Be sure to share the folder.
+
+- Add the id doc in [google.config.js](https://github.com/ccalobeto/svelte-pudding/commit/2e847602605124c4f86f45c71f791fee390d257f) and set the output.
+
+![](/static/documentation/google-doc-url.png)
+- Generate the `json` file with this command
+```zh
+npm run gdoc
 ```
 
-Deploying to Pudding AWS:
-```bash
-make pudding
-```
+- [Copy injection](https://github.com/ccalobeto/svelte-pudding/commit/92f300a10173e723d115c9097956dd827cf442bd)
 
-## Style
+## Part 10
+- The developer shows how they use **Figma** to design the digital content.
 
-There are a few stylesheets included by default in `src/styles`. Refer to them in `app.css`, the place for applying global styles.
+- Add an intro to *The pudding* through `website: home copy`
 
-For variable parity in both CSS and JS, modify files in the `properties` folder using the [Style Dictionary](https://amzn.github.io/style-dictionary/) API.
+- It is not practical that your team type a href in a doc file, so make it dynamic using `[popular]` in docs that refers to interesting stories of *The Pudding*, see since 50:39.[](https://github.com/ccalobeto/svelte-pudding/commit/9f4d9a185c34ab609094909b3f86b9ef584de7a2)
 
-Run `npm run style` to regenerate the style dictionary.
+## Part 11
+- The entire video is related to dynamic render content with google docs.
 
-#### Some css utility classes in reset.css
-* `.sr-only`: makes content invisible available for screen reader
-* `.text-outline`: adds a psuedo stroke to text element
+> [!WARNING]
+> Some pieces of text are not showed with middle lines.
 
-### Custom Fonts
-For locally hosted fonts, simply add the font to the `static/assets` folder and include a reference in `src/styles/font.css`, making sure the url starts with `"assets/..."`.
+## Part 12
+- Insert *base* path in some `href`.
 
-## Google Docs and Sheets
+- Generate multiple image sizes
 
-* Create a Google Doc or Sheet
-* Click `Share` -> `Advanced` -> `Change...` -> `Anyone with this link`
-* In the address bar, grab the ID - eg. "...com/document/d/**1IiA5a5iCjbjOYvZVgPcjGzMy5PyfCzpPF-LnQdCdFI0**/edit"
-* paste in the ID above into `google.config.js`, and set the filepath to where you want the file saved
-* If you want to do a Google Sheet, be sure to include the `gid` value in the url as well
+- Given a paragraph in a doc file with keys (popular and personal) place the some images.
+![](/static/documentation/12-paragraph.png)
 
-Running `npm run gdoc` at any point (even in new tab while server is running) will fetch the latest from all Docs and Sheets.
+- Output: little images in a paragraph.
+![](/static/documentation/12-little-images.png)
 
-## Structural Overview
+## Partt 13
+- Build Home.Search.svelte component for looking stories
 
-### Pages
-The `src/routes` directory contains pages for your app. For a single-page app (most cases) you don't have to modify anything in here. `+page.svelte` represents the root page, think of it as the `index.html` file. It is prepopulated with a few things like metadata and font preloading. It also includes a reference to a blank slate component `src/components/Index.svelte`. This is the file you want to really start in for your app.
+- Build a Home.Stories.svelte component to display a quick summary.
+Use of `setContext` and `getContext`
+![](/static/documentation/13-stories-card.png)
 
-### Embedding Data
-For smaller datasets, it is often great to embed the data into the HTML file. If you want to use data as-is, you can use normal import syntax (e.g., `import data from "$data/file.csv"`). If you are working with data but you want to preserve the original or clean/parse just what you need to use in the browser to optimize the front-end payload, you can load it via `+page.server.js`, do some work on it, and return just what you need. This is passed automatically to `+page.svelte` and accessible in any component with `getContext("data")`.
+- If you are searching stories the images collapses and display only a resume.
 
+## Part 14
+- Re-build the footer.
 
-## Pre-loaded helpers
+- A **Pitch a Story** page designed by Figma needs to move its content to google docs called **website:pitch copy** and format the text for being extracted by code.
+![Pitch a Story](/static/documentation/14-figma-design.png)
+![doc](/static/documentation/14-doc.png)
+![Pitch page](/static/documentation/14-pitch-deploy.gif)
 
-### Components
+- Create a google doc called **website:data viz resources copy** for resources and use `resources.svelte` page and `Resources.svelte` component to render its content. Create a sheet called **website:resources** to fill categories. Remember to include the doc and sheet google files in `google.config.cjs`.
+![resources doc](/static/documentation/14-website-resources.png)
+![resources sheet](/static/documentation/14-website-resources-sheet.png)
 
-Located in `src/components`.
+> [!NOTE]
+> Don't forget to share googel docs and sheets.
 
-```js
-// Usage
-import Example from "$components/Example.svelte";
-```
+## Part 15
+- Working with placeholder blurry images
 
-* `Footer.svelte`: Pudding recirculation and social links.
-* `Header.svelte`: Pudding masthead.
+- Create **website:resources* and `Resources.svelte` component for showing FAQs
+![resources](/static/documentation/15-resources-doc.png)
+![faq](/static/documentation/15-faq.png)
 
-### Helper Components
+- Create **about** page using a template **website:about copy2**  and a sheet **website:awards**. Create an `about.svelte` page. And Don't forget to add the changes
+to `google.config.js`
+![about](/static/documentation/15-about.png)
+![about](/static/documentation/15-about-2.png)
+![](/static/documentation/15-about-3.png)
 
-Located in `src/components/helpers`.
+- Adjust **website:picth copy google-doc** file
 
-```js
-// Usage
-import Example from "$components/helpers/Example.svelte";
-```
+## Part 16
+- Add bio data to `Author.svelte` content. Reduce images sizes and compress with **ImageOptimize** tool. Create a `staff.js` and complete `About.svelte` to show all for authors images and its link profiles.
+![](/static/documentation/16-about-authors.gif)
 
-*Available*
-* `Scrolly.svelte`: Scrollytelling.
+- Modify `Home.Stories.svelte` searching stories functionality, so it shows the first 10 blurry images and collapse the others at the bottom.
+![](/static/documentation/16-collapse-images.gif)
 
-*Need to migrate*
-* `ButtonSet.svelte`: Accessible button group inputs.
-* `Chunk.svelte`: Split text into smaller dom element chunks.
-* `Countdown.svelte`: Countdown timer text.
-* `DarkModeToggle.svelte`: A toggle button for dark mode.
-* `Figure.svelte`: A barebones chart figure component to handle slots.
-* `MotionToggle.svelte`: A toggle button to enable/disable front-end user motion preference.
-* `Range.svelte`: Customizable range slider.
-* `ShareLink.svelte`: Button to share link natively/copy to clipboard.
-* `SortTable.svelte`: Sortable semantic table with customizable props.
-* `Slider.svelte (and Slider.Slide.svelte)`: A slider widget, especially useful for swipe/slide stories.
-* `Tap.svelte`: Edge-of-screen tapping library, designed to integrate with slider.
-* `Tip.svelte`: Button that links to Strip payment link.
-* `Toggle.svelte`: Accessible toggle inputs.
+## Part 17
+- Modify the `links.js` and export **constants** to reach all the content.
 
-### Headless Components
+- Modify `Home.Stories.svelte` to increase the font sizes and show bolded fonts.
+![](/static/documentation/17-bolded-and-increased.gif)
 
-[bits UI](https://www.bits-ui.com/docs/introduction) comes pre-installed. It is recommended to use these for any UI components.
+- Create *tokenize* function in `Home.Search.svelte` that returns a list of tokens. Create a *getScore* function to give a rank.
 
-### Layercake Chart Components
+- Given a *search* word, the app will find all the related stories (even with different authors) and returns a score per story. You can enter composite words. It works with the name of each column which are called tokens. It also scored a word inside of a string with a middle of points of weights.
+![](/static/documentation/17-score.gif)
 
-Starter templates for various chart types to be used with [LayerCake](https://layercake.graphics/). Located in `src/components/layercake`.
+## Part 18
+- Reduce the opacity (a lighter color)
+![](/static/documentation/18-reduce-opacity.gif)
 
-*Note:* You must install the module `layercake` first.
+- Use of `del` tag and css to show delayed words and with css a fade in text(59:30).
+![](/static/documentation/18-delay-words.gif)
+![](/static/documentation/18-fade-in-text.gif)
 
-```js
-// Usage
-import Example from "$components/layercake/Example.svelte";
-```
+## Part 19
+- Text animation, background size and position 
+![](./static/documentation/19-text-animation.gif)
+![](/static/documentation/19-background-and-positions.gif)
 
-### Actions
+- Improve the interaction image
+![](/static/documentation/19-more-dynamic.gif)
 
-Located in `src/actions`.
+## Part 20
+- Create `Header.Social.svelte` and `Header.SlideOut.svelte` components
 
-```js
-// Usage
-import example from "$actions/action.js";
-```
+- Header positioning and accesability focus
+![](/static/documentation/20-header-positioning.gif)
 
-* `canTab.js`: enable/disable tabbing on child elements.
-* `checkOverlap.js`: Label overlapping detection. Loops through selection of nodes and adds a class to the ones that are overlapping. Once one is hidden it ignores it.
-* `focusTrap.js`: Enable a keyboard focus trap for modals and menus.
-* `keepWithinBox.js`: Offsets and element left/right to stay within parent.
-* `inView.js`: detect when an element enters or exits the viewport.
-* `resize.js`: detect when an element is resized.
+![](/static/documentation/20-accessability.gif)
 
-### Runes
+## Part 21
+- In firefox turn on the keyboard  navigation
+![](/static/documentation/21-firefox-navigation.png)
 
-These are located in `src/runes`. You can put custom ones in `src/runes/misc.js` or create unique files for more complex ones.
+- Header layout: padding between social links, padding between groups
+![](/static/documentation/21-header-layout.gif)
 
-```js
-// Usage
-import example from "$runes/example.js";
-import { example } from "$runes/misc.js";
-```
-*Available*
-* `viewport`: returns an object `{ width, height }` of the viewport dimensions. It is debounced for performance.
+- Create `Home.Promo.svelte` component to display **promos** text, use the `promo` field as a source present in `website:home copy` file. It is display with yellow background.
+![](/static/documentation/21-home-copy.png)
+![](/static/documentation/21-promo-display.png)
 
-*Need to migrate*
-* `mq`: returns an object of media queries booleans if they are enabled or not. You can modify them in the js file.
-* `previous`: returns the previous value of another value.
-* `scrollY`: returns a number of window vertical scroll position. It is throttled using rAF for performance.
-* `timer`: returns an object `{ timer, elapsed }`. `timer` has 5 methods (start, stop, toggle, set, reset) and `elapsed` is a value that is the number of ms.
+- Use of **Contrast checkers** basically [wcag-contrast]() library for more dynamic color. Follow #Part 22
 
-### Utils
+## Part 22
+- Convert an array of colors to hsl format
+![](/static/documentation/22-array-color.png)
+![](/static/documentation/22-array-to-hsl.png)
+Now see the stories colors link and its contrast background. 
+![](/static/documentation/22-colors.gif)
 
-Located in `src/utils/`.
+- On *search* jump to top, two actions are coded focus and jump (23:37)
+![](/static/documentation/22-focus.gif)
 
-```js
-// Usage
-import example from "$utils/example.js";
-```
-* `checkScrollDir.js`: Gets the user's scroll direction ("up" or "down")
-* `csvDownload.js`: Converts a flat array of data to CSV content ready to be used as an `href` value for download.
-* `generateId.js`: Generate an alphanumeric id.
-* `loadCsv.js`: Loads and parses a CSV file.
-* `loadImage.js`: Loads an image.
-* `loadJson.js`: Loads and parses a JSON file.
-* `loadPixels.js`: Loads the pixel data of an image via an offscreen canvas.
-* `localStorage.js`: Read and write to local storage.
-* `mapToArray.js`: Convenience function to convert a map to an array.
-* `move.js`: transform translate function shorthand.
-* `transformSvg.js`: Custom transition lets you apply an svg transform property with the in/out svelte transition. Parameters (with defaults):
-* `translate.js`: Convenience function for transform translate css.
-* `urlParams.js`: Get and set url parameters.
+- Make `pitch` route links **external** (if you click open another window), so inject "external" markup inside `author's.csv` output file. Be careful because there are '`' characters in some cells in author's google sheet. (38:00).
+![](/static/documentation/22-not-external.png)
+![](/static/documentation/22-external-injection.png)
 
-## Tips
+## Part 23
+- Use the *sveltekit* template for **error** page
+![](/static/documentation/23-error-page.png)
 
-### Image asset paths
-For `img` tags, use relative paths:
+- Modify color border: above the title (08:52)
+![](/static/documentation/23-title.png)
 
-```html
-<img src="assets/demo/test.jpg" alt="cat" />
-```
+- Some cool things in the site: padding title, size font, color underlines, color background font, signature, padding signature, size and padding stories, transform arrow to a hand (11:48)
+![](/static/documentation/23-styling.gif)
+![](/static/documentation/23-styling-2.gif)
 
-For CSS background images, use absolute paths:
+## Part 24
+- About section: compare skeletons between `Header.SlideOut.svelte` and `Footer.svelte`
 
-```css
-background: url("/assets/demo/test.jpg");
-```
+- Refactor: moving ctas, follow, add cta and add links (6:31)
+![](/static/documentation/24-refactor.gif)
 
-View example code in the preloaded demo.
+- Refactor footer layout: side by side  (23:00)
+![](/static/documentation/24-refactor-footer.gif)
+ 
+- Refactor Home page (24:19)
+![](/static/documentation/24-refactor-home.gif)
+
+- Reuse component: refactor author's page: styling, an excelent function to perform which social media show if the author has or hasn't  (43:35)
+![](/static/documentation/24-authors-page.gif)
