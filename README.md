@@ -6,6 +6,9 @@ Here is the way how you start --> [Svelte Starter](./Svelte-starter.md)
 
 ## Notes for pudding developer
 Some parts don't have code, see the log.
+>[!IMPORTANT]
+> Don't forget to deploy like this `make github`
+
 
 ## Part 1
 ### Data generation
@@ -61,7 +64,10 @@ The mission is to use resizes to lower bandwidth
 - Change the way of [loading and cleaning](https://github.com/ccalobeto/svelte-pudding/commit/16235ec72db0877479096a876ac535588d9ea08b) a csv file
 
 - Create an [author's page](https://github.com/ccalobeto/svelte-pudding/commit/14f4bdb28e133a0932785796371583c04a544770) component
-[link](http://localhost:5173/author/amber-thomas/). It is not working in production.
+[dev](http://localhost:5173/author/amber-thomas/). 
+[prod]/https://ccalobeto.github.io/svelte-pudding/author/amber-thomas/
+[download](https://ccalobeto.github.io/svelte-pudding/api/authors/amber-thomas)
+
 
 - Create a *page.js* that use an author that fetches a request to an *api* that filter his stories.
 
@@ -78,10 +84,11 @@ The mission is to use resizes to lower bandwidth
 - Set the fonts locally and [use](https://github.com/ccalobeto/svelte-pudding/commit/2e59187254e5e739e53ab229c89cbc2695cc4539) (16:41) 
 
 - Setting base path (19:36)
-Problems in build time
-
+The base path is working
+![](/static/documentation/5-basepath.png)
 
 ## Part 6
+why 
 
 ## Part 7
 - [Image](https://github.com/ccalobeto/svelte-pudding/commit/80b94272a96f81db01e8b2b03681d5e8d11be905) improve 
