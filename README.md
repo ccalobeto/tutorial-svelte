@@ -12,14 +12,22 @@
 
 ## Content
 ### 1. Basics
-#### Different ways to set colors: color, hsl, olkch
-#### The best practice is to use *classes* and not *identifiers* like `#`.
-#### In Inheritance is important to use *fallbacks* in case the first value of the property does not exits, then use the second value and so on. 
-#### Pseudo classes 
+#### 1.1 Colors
+Different ways to set colors with property-values `rgb`, `hsl`, `olkch`
+
+> [!NOTE] A good practice to build your site is to use *classes* and not *identifiers* like `#`.
+
+#### 1.2 Inheritance 
+In inheritance is important to use *fallbacks* in case the first value of the property does not exits, then use the second value and so on. 
+
+#### 1.3 Pseudo classes 
 - They are states of properties
 - These are `hover`, `active`, `focus`, `first-child`, `last-child` etc
 - Border and outline. Border makes a little jumping, but outline not.
 ![border-to-outline](static/docs/border-to-outline.gif)
 
-
+#### 1.4 Combined selectors
+- Combined selector to paint text
+- Use operators (1:00:00) like `>` (direct childs), `~` (brothers elements), `+` direct child <-- used by adjoining buttoms. 
+- 
 
