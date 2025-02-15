@@ -1,38 +1,25 @@
-# sv
+# CURSO DE CSS COMPLETO: De Principiante a Front-End 2024
+[Video Tutorial](https://www.youtube.com/watch?v=TlJbu0BMLaY)
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+## Enlaces recomendados
+- [Manz.dev](https://lenguajecss.com/)
+- [Google](https://web.dev/learn/css)
+- [mdm](https://developer.mozilla.org/es/docs/Web/CSS#tutoriales) `<-- la mejor`
+- [codilink](https://codi.link/) for online practice
 
-## Creating a project
+## Calculators
+- [oklch](https://oklch.com/)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Content
+### 1. Basics
+#### Different ways to set colors: color, hsl, olkch
+#### The best practice is to use *classes* and not *identifiers* like `#`.
+#### In Inheritance is important to use *fallbacks* in case the first value of the property does not exits, then use the second value and so on. 
+#### Pseudo classes 
+- They are states of properties
+- These are `hover`, `active`, `focus`, `first-child`, `last-child` etc
+- Border and outline. Border makes a little jumping, but outline not.
+![border-to-outline](static/docs/border-to-outline.gif)
 
-```bash
-# create a new project in the current directory
-npx sv create
 
-# create a new project in my-app
-npx sv create my-app
-```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
