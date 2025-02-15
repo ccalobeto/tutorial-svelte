@@ -68,7 +68,22 @@
 	<p>Porque no me haces caso <strong>punk</strong></p>
 </article>
 
+<h1>--Specifity--</h1>
+<p class="text">Simulando la especifidad</p>
+
 <style>
+	/* Specifity */
+	.text {
+		font-size: medium;
+		color: #09f;
+		font-family: system-ui;
+		font-weight: bold;
+	}
+
+	p {
+		color: red;
+	}
+
 	/* combined selectors */
 	p {
 		font-size: 48px;
