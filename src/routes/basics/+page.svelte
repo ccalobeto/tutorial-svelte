@@ -56,7 +56,38 @@
 	</li>
 </ul>
 
+<h1>--Combined selectors--</h1>
+
+<strong> Que tal troll, deja de fastidiar por twitter</strong>
+
+<p>Mis comentarios son para los no <strong>zurdos</strong></p>
+
+<article>
+	<strong> Ola mostrillo</strong>
+
+	<p>Porque no me haces caso <strong>punk</strong></p>
+</article>
+
 <style>
+	/* combined selectors */
+	p {
+		font-size: 48px;
+	}
+
+	strong {
+		color: green;
+	}
+
+	p strong {
+		color: aqua;
+		opacity: 0.7;
+	}
+
+	/* nested selectors */
+	article > strong {
+		color: pink;
+	}
+
 	/* first-child, last-child */
 	.experience li:first-child {
 		color: pink;
@@ -91,6 +122,9 @@
 	}
 
 	/* colors */
+	h1 {
+		color: rgb(134, 122, 122);
+	}
 
 	h2 {
 		color: rgba(255, 0, 0, 0.5);
