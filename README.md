@@ -73,6 +73,15 @@ If an element is set two times, it will take the property of the last one.
 - Position-sticky
 The element (blue box) remains fixed to the container (black border box).
 
+## 3. z-index
+- See the effect the blue box is on top of one container and behind of another container. It is caused by **contexto de aplilamiento**. 
+![](/static/docs/fixed.gif)
 
+- Fix with `z-index:2`
+![](/static/docs/z-index.gif)
+
+- Use tools like [web.dev](https://web.dev/learn/css/z-index)
+
+- z-index deeper 2:22:00, `position:relative` is the key.
 
 
