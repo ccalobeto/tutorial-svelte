@@ -50,3 +50,29 @@ If an element is set two times, it will take the property of the last one.
 - `px` is an *absolute* value.
 - `50vh` 50% *relative* to the viewport height
 - *Reset css* change default css values, is not used now. *Normalize css*  common css values for different **browsers**.
+
+## 2. Box Model
+### 2.1 Initial concepts
+- `span`, `a`, `em` and `strong` work **inline** so *height* and *width* properties don't work with these elements. Only *padding*.
+- `div`, `h1` and `section` work with **block** by default so there is a jump line.
+- The box size is width + height + padding + border.
+- The content is surrounded by *height* and *width* limits only.
+- The box by default is set to `box-sizing: content-box`
+- With `box-sizing: border-box` padding and border are inside *height* and *width* limits. ![](/static/docs/box-sizing.png)
+
+### 2.2 Middle concepts
+- Overflow: happens when a content(text, images, videos) doesn't reach in the box. Use `overflow:auto` or `overflow:scroll`.
+![](/static/docs/position-scroll.gif)
+
+- Position: use in combination with `position:relative` for the parent element and `position:absolute` for the child. In the child use with `right`, `top`, `bottom` and `left`. If you want to center use `margin: auto` and `inset:0`.
+![](/static/docs/position-center.png)
+
+- Position-fixed: it remains fixed in the viewport. It is used by  chatbots window.
+![](/static/docs/position-fixed.gif)
+
+- Position-sticky
+The element (blue box) remains fixed to the container (black border box).
+
+
+
+
