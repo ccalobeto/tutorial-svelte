@@ -84,4 +84,38 @@ The element (blue box) remains fixed to the container (black border box).
 
 - z-index deeper 2:22:00, `position:relative` is the key.
 
+## 4. Flex
+It works only in **one axis** as a column or a row. More cool exercisesin [flexboxfroggy](https://flexboxfroggy.com/). 
+- Initial state child div element by default `display:block`
+![](/static/docs/initial-state.png)
+
+- Change state in child div to `display:inline` and it will stacked as text and `height` and `width` will not work.
+![](/static/docs/flex-inline.png)
+
+- In parent `display:flex` arrange childs as a block but horizontally.
+![](/static/docs/display-flex.png)
+
+- In parent `display:flex` and `flex-direction:column` append the blocks vertically.
+![](/static/docs/flex-direction.png)
+
+- Use `flex-wrap:nowrap` to fit the childs in the parent in one row. By default *nowrap*.
+![Initial](/static/docs/flex-nowrap.png)
+![Real](/static/docs/flex-nowrap-real.png)
+
+- Use `flex-wrap:wrap` to stacked childs (each 100px) if they don't fit the parent (200px).
+![Then](/static/docs/flex-wrap.png)
+
+- Control spaces betwen elements (in deep) : 2:45:00. With `flex:auto` , `flex:1` like here ![flex-1](/static/docs/flex-1.png). Complex configuration of flex; different sizes of childs ![flex-complex](/static/docs/flex-complex.png).
+
+- Justify-content
+![center](/static/docs/justify-center.png)
+![space-around](/static/docs/justify-space.png)
+![between](/static/docs/justify-between.png)
+![gap](/static/docs/justify-gap.png)
+
+- Cross axis distribution in parent with `align-items: center` and `align-content: center` => 3:00:00. Use dev tools to debug.
+![](/static/docs/align-content.png)
+
+
+
 
