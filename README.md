@@ -7,10 +7,12 @@
 - [mdm](https://developer.mozilla.org/es/docs/Web/CSS#tutoriales) `<-- la mejor`
 - [codilink](https://codi.link/) for online practice
 
-## Calculators
+## Tool calculators
 - [oklch](https://oklch.com/)
 
 # Content
+Every section has a route for example `http://localhost:5173/basics`. In `+page.svelte` file of every route the style is divided into subsections.
+
 ## 1. Basics
 ### 1.1 Colors
 Different ways to set colors with property-values `rgb`, `hsl`, `olkch`
@@ -164,6 +166,34 @@ Use of `<aside>` element and `minmax` function to calculates the minimum size of
 
  - Use few code instead of media queries
  ![](/static/docs/grid-bento-media.gif)
+
+## 6. Layout
+### 6.1 Layouts
+- Simple layout
+![](/static/docs/layout-basic.png)
+
+- Enhanced layout naming grid-area and here is how to control **visually**.
+```js
+grid-template-areas: 
+    "header header header"
+    "sidebar content content"
+    "footer footer footer";
+```
+![](/static/docs/layout-enhanced.png)
+
+- Mobile layout
+Use `@media` queries to move sidebar to the top.
+![](/static/docs/layout-responsive.gif)
+
+### 6.2 Inline alignment of elements
+Element size is different from grid size and confuses a lot of people.
+
+- Inline alignment with `justify-content` and `align-content` or `place-content` (talked too in flex) => 4:39:20
+![](/static/docs/layout-inline.png)
+
+
+
+
 
 
 
