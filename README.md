@@ -116,6 +116,58 @@ It works only in **one axis** as a column or a row. More cool exercisesin [flexb
 - Cross axis distribution in parent with `align-items: center` and `align-content: center` => 3:00:00. Use dev tools to debug.
 ![](/static/docs/align-content.png)
 
+## 5. Grid
+Grid is **multidimensional**, Flex is **one-dimensional**. Go to [grid garden](https://cssgridgarden.com/) to take into practice, the learned grid concepts. Manipulate the grid is like a sheet in excel.
+
+- Element sizes can be *fixed* or *flexible*.
+
+- Elements can be *positioned* every where in the grid and be on top other elements.
+
+- Grid with two columns.
+![](/static/docs/grid-2.png)
+
+- Grid template columns
+![](/static/docs/grid-auto.png)
+![](/static/docs/grid-combinations.png)
+![](/static/docs/grid-fractions.png)
+![](/static/docs/grid-fractions-variation.png)
+![](/static/docs/grid-rows.png)
+
+- Aside bar => 3:53:00
+Use of `<aside>` element and `minmax` function to calculates the minimum size of the aside bar. This function is used instead of `@media queries`. 
+
+### 5.1 Example 
+- Begins 3:57:00
+
+- A simple grid distribution
+![](/static/docs/grid-example.png)
+
+- Be responsive without using *@media* queries in one line with `grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))`, fills column(s) of 1fr (or more) every 200px width. 
+![](/static/docs/grid-example-responsive.gif)
+
+- Differences between *autofill* and *autofit* => fits width images to the width viewport. You will look that effect when there are few of images. 
+
+### 5.2 Bento Grids
+ - What we will do 
+ ![](/static/docs/grid-bento.png)
+
+ - Use grid layout in dev tools 
+ ![](/static/docs/grid-dev-tools.png)
+
+ - Bento builded with `grid-column` and `grid-row`. Use case for calculators.
+ ![](/static/docs/grid-bento-build.png)
+
+ - You could add negative numbers, just count reverse.
+ ![](/static/docs/grid-bento-more.png)
+
+ - You could set one cell on top of another cell and complement with `z-index` => 4:23:50. Utility while you do hover in a grid, another behavior appears.
+
+ - Use few code instead of media queries
+ ![](/static/docs/grid-bento-media.gif)
+
+
+
+
 
 
 
