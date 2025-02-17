@@ -33,8 +33,10 @@
 	/* Grid example */
 	.grid-images {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 		gap: 32px 16px; /* space between rows and columns */
+		max-width: 800px; /* max width */
+		margin: 0 auto; /* center */
 	}
 	img {
 		width: 100%;
