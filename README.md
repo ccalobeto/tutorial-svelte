@@ -191,6 +191,44 @@ Element size is different from grid size and confuses a lot of people.
 - Inline alignment with `justify-content` and `align-content` or `place-content` (talked too in flex) => 4:39:20
 ![](/static/docs/layout-inline.png)
 
+## 7. Advanced animations
+Two forms of element animations: **transitions** and **animations**.
+They improve the user experience.
+
+### 7.1 Transitions
+- Inital state
+![](/static/docs/animations-initial.gif)
+
+- Transition goes in its **initial** state to avoid jumps.
+By default transitions are linear and animate all here: background, scale and shadow.
+![](/static/docs/animation-transition.gif)
+
+- But shadows are too cost in memory => 5:01:00. Control the animation and remove long shadows `transition-property: background, scale`.
+
+- Non linear transitions: *ease*, *ease-in*, *ease-out*, *ease-in-out*, *steps(n)* and *cubic-bezier(params)*
+![](/static/docs/animation-ease.gif)
+
+- Use delay to show more fancy elements and **improve user experience** with `transition-delay: 1s` => 5:13:50
+![](/static/docs/transition-delay.gif)
+
+- Short version with `transition`, delay goes to final.
+```js
+transition: 
+  background 300ms linear 2s;
+  scale 500ms ease-in-out;
+  box-shadow 1s ease;
+```
+- Not all elements are transitioned like images, fonsts etc because they don't have a middle state.
+
+- Deactive transitions with `@media`query => 5:22:00.
+
+
+
+
+
+
+
+
 
 
 
