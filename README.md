@@ -197,16 +197,16 @@ They improve the user experience.
 
 ### 7.1 Transitions
 - Inital state
-![](/static/docs/animations-initial.gif)
+![](/static/docs/transition-initial.gif)
 
 - Transition goes in its **initial** state to avoid jumps.
 By default transitions are linear and animate all here: background, scale and shadow.
-![](/static/docs/animation-transition.gif)
+![](/static/docs/transition-transition.gif)
 
 - But shadows are too cost in memory => 5:01:00. Control the animation and remove long shadows `transition-property: background, scale`.
 
 - Non linear transitions: *ease*, *ease-in*, *ease-out*, *ease-in-out*, *steps(n)* and *cubic-bezier(params)*
-![](/static/docs/animation-ease.gif)
+![](/static/docs/transition-ease.gif)
 
 - Use delay to show more fancy elements and **improve user experience** with `transition-delay: 1s` => 5:13:50
 ![](/static/docs/transition-delay.gif)
@@ -221,6 +221,29 @@ transition:
 - Not all elements are transitioned like images, fonsts etc because they don't have a middle state.
 
 - Deactive transitions with `@media`query => 5:22:00.
+
+### 7.2 Animations
+Talking about fotograms and *keyframes*. Animations returns to initial state. It is better to do css than js. Animations use GPU.
+
+- Animation simple
+![](/static/docs/animation-simple.gif)
+
+- Animation enhanced that blinks 5 times, `animation-iteration-count: 5`
+![](/static/docs/animation-enhanced.gif)
+
+- Many animations of Mario => 5:36:40. You could insert two o more animations too.
+![](/static/docs/animation-mario.gif)
+![](/static/docs/animation-mario-2.gif)
+
+
+
+
+
+
+
+
+
+
 
 
 
