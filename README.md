@@ -235,6 +235,24 @@ Talking about fotograms and *keyframes*. Animations returns to initial state. It
 ![](/static/docs/animation-mario.gif)
 ![](/static/docs/animation-mario-2.gif)
 
+## 8. Scrolly
+
+### 8.1 Scrolly
+First scrolly page with a top red bar that increases wide in scrolly.
+![](/static/docs/scrolly-simple.gif)
+
+### 8.2 Scrolly header
+- Scrolly
+![](/static/docs/animation-sticky.gif)
+
+- Scrolly header `animation-range: 0% 200px` accelerates the top bar scroll.
+![](/static/docs/animation-header.gif)
+
+
+
+
+
+
 
 
 
