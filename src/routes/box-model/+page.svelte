@@ -119,7 +119,7 @@
 		padding: 36px;
 		border: 10px solid purple;
 		margin: 20px;
-		/* box-sizing: border-box; /*by default* */
+		/* box-sizing: content-box; /*by default* */
 		box-sizing: border-box;
 	}
 

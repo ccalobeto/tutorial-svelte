@@ -13,7 +13,7 @@
 		width: 750px;
 		height: 800px;
 		box-sizing: border-box;
-		/* position: relative; wthis is the key, must exists */
+		/* position: relative; this is the key, must exists */
 	}
 
 	.container-position-z-index {
