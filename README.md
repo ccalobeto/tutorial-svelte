@@ -1,5 +1,5 @@
 # Notes
-Follows from [svelte-porfolio](https://github.com/ccalobeto/svelte-portfolio/).
+Follows from [svelte-vis-1](hhttps://github.com/ccalobeto/svelte-vis-1).
 
 # Lab 8: Geospatial visualizations
 ## 8.0 Setup
