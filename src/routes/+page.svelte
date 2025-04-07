@@ -36,14 +36,14 @@
 			<dd>{data.public_gists}</dd>
 		</dl>
 	</section>
-	<h1>
+	<div class="title">
 		Latest Projects
 		<div class="projects">
 			{#each projects.slice(0, 3) as p}
 				<Project data={p} hLevel="3" />
 			{/each}
 		</div>
-	</h1>
+	</div>
 {/if}
 
 <style>
@@ -62,5 +62,10 @@
 	dd {
 		margin-left: 0;
 		grid-row: 2;
+	}
+
+	.title {
+		font-size: 2em;
+		font-weight: bold;
 	}
 </style>
