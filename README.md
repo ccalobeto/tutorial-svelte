@@ -1,8 +1,14 @@
 # Notes
-These are useful concepts to follow a successful carreer in data visualization. Taken from the [vis-society](https://vis-society.github.io/) course from MIT.
-All the lab progress are in the commits.
+These are useful concepts to follow a successful carreer in data visualization. 
+There are 4 branches:
+- **main** and [svelte-MIT-vis](https://github.com/ccalobeto/tutorial-svelte/tree/svelte-MIT-vis) branches are from the [vis-society](https://vis-society.github.io/) course from MIT. **svelte-MIT-vis** is deployed in cloudflare. 
+- [svelte-with-css](https://github.com/ccalobeto/tutorial-svelte/tree/svelte-with-css) and
+- [svelte-pudding](https://github.com/ccalobeto/tutorial-svelte/tree/svelte-pudding)
 
-The course has two parts. [The dashboard](https://github.com/ccalobeto/svelte-vis-2) is the other one.
+All the lab progresses are in the commits.
+
+>[!WARNING]
+> Don't merge. Every branch is a tutorial.
 
 # Table of Contents
 - [Setup](#lab-0-setup)
@@ -13,6 +19,8 @@ The course has two parts. [The dashboard](https://github.com/ccalobeto/svelte-vi
 - [5. Svelte II (Loading Data & Reactivity)](#lab-5-svelte-ii-loading-data--reactivity)
 - [6. Visualizing categorical data with D3](#lab-6-visualizing-categorical-data-with-d3)
 - [7. Visualizing quantitative data with D3](#lab-7-visualizing-quantitative-data-with-d3)
+
+The course continues in [svelte-MIT-vis](https://github.com/ccalobeto/tutorial-svelte/tree/svelte-MIT-vis).
 
 ## Lab 0. Setup
 Installation of tools:
