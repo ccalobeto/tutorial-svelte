@@ -29,7 +29,7 @@ jobs:
       - name: build
         env:
           BASE_PATH: '/${{ github.event.repository.name }}'
-          PUBLIC_MAPBOX_API_ACCESS_TOKEN: ${{ vars.MAPBOX_API }} 
+          PUBLIC_MAPBOX_API_ACCESS_TOKEN: ${{ secrets.MAPBOX_TOKEN }} 
         run: |
           npm run build
 
