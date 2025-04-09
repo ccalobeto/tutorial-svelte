@@ -3,12 +3,11 @@
 	import '../../../node_modules/mapbox-gl/dist/mapbox-gl.css';
 	import { onMount } from 'svelte';
 	import * as d3 from 'd3';
-	// import { _MAPBOX_KEY } from './+page.server';
+	import { PUBLIC_MAPBOX_API_ACCESS_TOKEN } from '$env/static/public';
 
 	const TRIP_DATA_URL = 'https://vis-society.github.io/labs/8/data/bluebikes-traffic-2024-03.csv';
 	const TRIP_STATIONS_URL = 'https://vis-society.github.io/labs/8/data/bluebikes-stations.csv';
 
-	let privateKey;
 	let stations = [];
 	let map;
 	let mapViewChanged = 0;
@@ -47,11 +46,7 @@
 	}
 
 	onMount(async () => {
-		const response = await fetch('api/privateKey');
-		const data = await response.json();
-		privateKey = data.privateKey;
-		mapboxgl.accessToken = privateKey;
-
+		mapboxgl.accessToken = PUBLIC_MAPBOX_API_ACCESS_TOKEN;
 		map = new mapboxgl.Map({
 			container: 'map',
 			style: 'mapbox://styles/mapbox/streets-v12',
