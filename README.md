@@ -1,5 +1,5 @@
 # Notes
-Follows from [svelte-vis-1](hhttps://github.com/ccalobeto/svelte-vis-1).
+Follows from branch [main](https://github.com/ccalobeto/tutorial-svelte/tree/main).
 
 # Lab 8: Geospatial visualizations
 ## 8.0 Setup
